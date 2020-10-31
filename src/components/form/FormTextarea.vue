@@ -1,13 +1,13 @@
 <template>
-	<ValidationProvider :rules="rules" :name="name" :vid="vid" v-slot="v">
+	<ValidationProvider :rules="rules" :name="name" v-slot="v">
 		<label :for="id">{{ label }}</label>
-		<input
-			:type="type"
+		<textarea
 			:id="id"
 			:class="v.classes"
 			:placeholder="placeholder"
-			autocomplete="on"
 			:value="value"
+			cols="10"
+			rows="5"
 			@input="$emit('input', $event.target.value)"
 		/>
 		<p>{{ v.errors[0] }}</p>
@@ -23,10 +23,6 @@ export default {
 		ValidationProvider,
 	},
 	props: {
-		type: {
-			type: String,
-			default: 'text',
-		},
 		value: {
 			type: String,
 			default: '',
@@ -48,16 +44,12 @@ export default {
 			type: [String, Object],
 			default: '',
 		},
-		vid: {
-			type: String,
-			default: undefined,
-		},
 	},
 };
 </script>
 
 <style lang="scss" scoped>
-input {
+textarea {
 	@include input;
 	margin-bottom: 0.2rem;
 }
@@ -78,13 +70,14 @@ p {
 	color: var(--warning);
 	display: inline-block;
 	position: absolute;
-	top: 97.5%;
+	top: 98.5%;
 	line-height: 1.1;
 }
+
 .form .form-group .invalid {
 	border-bottom: 1px solid var(--warning);
 }
-.form .form-group input.invalid:focus {
+.form .form-group textarea.invalid:focus {
 	border-bottom: 1px solid var(--warning);
 	outline: 1px solid var(--warning);
 }

@@ -1,10 +1,11 @@
 <template>
 	<div class="form-wrapper">
-		<form class="form">
+		<form class="form" :class="className">
 			<div class="form-group">
 				<h2 class="heading-2">{{ title }}</h2>
 			</div>
 			<slot name="form-content"></slot>
+			<slot name="form-down"></slot>
 		</form>
 	</div>
 </template>
@@ -17,6 +18,9 @@ export default {
 			type: String,
 			required: true,
 		},
+		className: {
+			type: String,
+		},
 	},
 };
 </script>
@@ -27,7 +31,7 @@ export default {
 	justify-content: center;
 	align-items: center;
 
-	padding: 5rem 0;
+	padding: 7.5rem 0;
 	min-height: 91vh;
 }
 .form {
@@ -66,5 +70,8 @@ export default {
 			flex-direction: column;
 		}
 	}
+}
+.wider {
+	max-width: 60rem;
 }
 </style>

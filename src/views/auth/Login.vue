@@ -1,7 +1,7 @@
 <template>
 	<ValidationObserver v-slot="{ handleSubmit }" slim>
 		<FormWrapper
-			title="Login"
+			title="Sign in"
 			@submit.prevent.native="
 				handleSubmit(() =>
 					LOGIN_USER({
@@ -33,25 +33,20 @@
 					/>
 				</div>
 				<div class="form-group">
-					<button class="btn">Login</button>
+					<button class="btn">Sign in</button>
 				</div>
 			</template>
 
-			<!-- <template #form-down>
-				<div class="form-group">
-					<button class="btn">
-						Prijavi se
-					</button>
-				</div>
+			<template #form-down>
 				<div class="form-footer">
 					<router-link :to="{ name: 'ForgotPassword' }" tag="a">
-						Zaboravili ste lozinku?
+						Forgot your password?
 					</router-link>
 					<router-link :to="{ name: 'Register' }" tag="a">
-						Registriraj se!
+						Sign up!
 					</router-link>
 				</div>
-			</template> -->
+			</template>
 		</FormWrapper>
 	</ValidationObserver>
 </template>
@@ -105,4 +100,12 @@ export default {
 	},
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.form-footer {
+	display: flex;
+	justify-content: space-around;
+	a {
+		color: var(--secondary);
+	}
+}
+</style>

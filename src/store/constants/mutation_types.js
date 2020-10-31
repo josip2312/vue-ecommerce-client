@@ -1,5 +1,13 @@
 //products
 export const SET_PRODUCTS = 'SET_PRODUCTS';
+export const SET_SINGLE_PRODUCT = 'SET_SINGLE_PRODUCT';
+export const SET_REVIEWED_PRODUCT = 'SET_REVIEWED_PRODUCT';
+export const SET_DELETE_PRODUCT = 'SET_DELETE_PRODUCT';
+export const SET_PRODUCT_ERROR = 'SET_PRODUCT_ERROR';
+export const PUSH_CREATED_PRODUCT = 'PUSH_CREATED_PRODUCT';
+
+export const SET_CART = 'SET_CART';
 
 //users
 export const SET_USER = 'SET_USER';
+export const SET_LOGGED_OUT = 'SET_LOGGED_OUT';

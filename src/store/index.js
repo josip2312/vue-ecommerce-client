@@ -9,7 +9,19 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {},
-	plugins: [createPersistedState()],
+	plugins: [
+		createPersistedState({
+			storage: window.localStorage,
+
+			/* reducer: (store) => {
+				console.log(store);
+				if (!store.userModule.loggedIn) {
+					return {};
+				}
+				return store;
+			}, */
+		}),
+	],
 	mutations: {},
 	actions: {},
 	modules: {

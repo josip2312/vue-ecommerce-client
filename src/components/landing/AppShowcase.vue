@@ -39,7 +39,7 @@ export default {
 }
 .showcase-heading {
 	width: 100%;
-	max-width: 40rem;
+	max-width: 45rem;
 	padding-top: 10em;
 	padding-bottom: 5em;
 
@@ -80,5 +80,25 @@ export default {
 	top: -2.5rem;
 	left: 2.5rem;
 	background-color: var(--secondary);
+}
+
+//animations on land
+.showcase-heading {
+	& > * {
+		opacity: 0;
+	}
+	.heading-1 {
+		animation: fadeLeft 750ms ease-in-out forwards 500ms;
+	}
+	.heading-desc {
+		animation: fadeLeft 750ms ease-in-out forwards 750ms;
+	}
+	.heading-buttons {
+		animation: fadeLeft 750ms ease-in-out forwards 1000ms;
+	}
+}
+.showcase-image {
+	opacity: 0;
+	animation: fadeLeft 750ms ease-in-out forwards;
 }
 </style>

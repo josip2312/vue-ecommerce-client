@@ -1,53 +1,83 @@
 <template>
 	<div class="header">
 		<div class="wrapper">
-			<div class="logo">
+			<router-link :to="{ name: 'Index' }" class="logo">
 				Logo
-			</div>
+			</router-link>
+
 			<button class="nav-toggle" @click="toggleSidebar">
 				<span
 					class="hamburger"
 					:class="{ active: isSidebarVisible }"
 				></span>
 			</button>
-			<nav
-				class="navigation"
-				:class="{ isSidebarVisible: isSidebarVisible }"
-			>
-				<router-link :to="{ name: 'Index' }" class="nav-link" href="#"
-					>Home
-				</router-link>
+			<Navigation :isSidebarVisible="isSidebarVisible" />
 
-				<router-link :to="{ name: 'Login' }" class="nav-link" href="#"
-					>Login
-				</router-link>
+			<div class="user-dropdown-toggle">
+				<button
+					class="nav-link user-toggle-btn"
+					@click="toggleUserDropdown"
+					v-if="isLoggedIn"
+				>
+					<img class="user" src="@/assets/icons/user.svg" alt="" />
+					<img src="@/assets/icons/chevronDown.svg" alt="" />
+				</button>
+				<UserDropdownMenu
+					:isUserDropdownVisible="isUserDropdownVisible"
+				/>
+			</div>
 
-				<router-link
-					:to="{ name: 'Register' }"
-					class="nav-link"
-					href="#"
-					>Register
-				</router-link>
-			</nav>
+			<div class="admin-dropdown-toggle">
+				<button
+					class="nav-link admin-toggle-btn"
+					@click="toggleAdminDropdown"
+					v-if="isLoggedIn && isAdmin"
+				>
+					<span>Admin</span>
+					<img src="@/assets/icons/chevronDown.svg" alt="" />
+				</button>
+				<AdminDropdownMenu
+					:isAdminDropdownVisible="isAdminDropdownVisible"
+				/>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import Navigation from './Navigation';
+import UserDropdownMenu from './UserDropdownMenu';
+import AdminDropdownMenu from './AdminDropdownMenu';
+
 export default {
 	name: 'TheHeader',
+	components: {
+		Navigation,
+		UserDropdownMenu,
+		AdminDropdownMenu,
+	},
 	data() {
 		return {
 			isSidebarVisible: false,
+			isUserDropdownVisible: false,
+			isAdminDropdownVisible: false,
 		};
 	},
+	computed: {
+		...mapGetters(['isLoggedIn', 'isAdmin']),
+	},
+
 	methods: {
 		toggleSidebar() {
 			this.isSidebarVisible = !this.isSidebarVisible;
 		},
-	},
-	setup() {
-		return {};
+		toggleUserDropdown() {
+			this.isUserDropdownVisible = !this.isUserDropdownVisible;
+		},
+		toggleAdminDropdown() {
+			this.isAdminDropdownVisible = !this.isAdminDropdownVisible;
+		},
 	},
 };
 </script>
@@ -65,18 +95,21 @@ export default {
 }
 
 .wrapper {
+	position: relative;
 	width: 80%;
 	margin: 0 auto;
 	max-width: 120rem;
 
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 
 	.logo {
 		padding: 1.75rem 0;
+		color: var(--font-secondary);
 	}
 	.nav-toggle {
+		margin-left: auto;
+
 		display: inline-block;
 		@media only screen and(min-width:$vp-8) {
 			display: none;
@@ -128,68 +161,59 @@ export default {
 		}
 	}
 
-	.navigation {
-		position: fixed;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		z-index: 10;
-		min-width: 50vw;
-		background-color: var(--primary);
+	.user-dropdown-toggle {
+		position: relative;
+		z-index: 15;
+		margin-left: 2.5rem;
 
-		transform: translateX(50vw);
-		transition: transform 300ms ease-in-out;
-		transform-origin: right;
+		padding: 0.5rem 0;
 
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-
-		@media only screen and(min-width:$vp-8) {
-			transform: translateX(0);
-			flex-direction: row;
-			position: relative;
-			min-width: auto;
+		.user-toggle-btn {
+			display: flex;
+			align-items: center;
+			cursor: pointer;
+			background: none;
+			border: none;
 		}
 
-		.nav-link {
-			position: relative;
-			display: block;
-			margin: 2.5rem 1rem;
-			padding: 0.25rem 0;
-			color: var(--font-secondary);
-			@media only screen and(min-width:$vp-8) {
-				margin: 0 2.5rem;
-
-				&:last-child {
-					margin-right: 0;
-				}
-			}
+		.user {
+			margin-right: 1rem;
 		}
-		.nav-link::after {
-			content: '';
-			position: absolute;
-			left: 0;
-			bottom: 0;
-			height: 2px;
-			border-radius: 1rem;
-			width: 100%;
+		img {
+			width: 2.5rem;
+			height: 2.5rem;
+		}
+		&:hover::after {
 			transform: scale(0, 1);
-			transform-origin: left;
-			transition: transform 200ms ease-in-out;
-			background-color: var(--font-secondary);
-		}
-		.nav-link:hover::after {
-			transform: scale(1, 1);
-		}
-		.router-link-exact-active::after {
-			transform: scale(1, 1);
 		}
 	}
-	.isSidebarVisible {
-		opacity: 1;
-		transform: translateX(0);
+
+	.admin-dropdown-toggle {
+		position: relative;
+		z-index: 15;
+		margin-left: 3.5rem;
+
+		padding: 0.5rem 0;
+
+		.admin-toggle-btn {
+			display: flex;
+			align-items: center;
+			cursor: pointer;
+			background: none;
+			border: none;
+			color: var(--font-secondary);
+		}
+
+		span {
+			margin-right: 1rem;
+		}
+		img {
+			width: 2.5rem;
+			height: 2.5rem;
+		}
+		&:hover::after {
+			transform: scale(0, 1);
+		}
 	}
 }
 </style>

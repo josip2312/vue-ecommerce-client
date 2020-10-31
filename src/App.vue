@@ -32,6 +32,6 @@ export default {
 <style lang="scss">
 @import '@/assets/sass/app.scss';
 .wrap {
-	min-height: 100vh;
+	min-height: 91vh;
 }
 </style>

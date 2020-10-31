@@ -1,7 +1,7 @@
 <template>
 	<ValidationObserver v-slot="{ handleSubmit }" slim>
 		<FormWrapper
-			title="Register"
+			title="Sign up"
 			@submit.prevent.native="
 				handleSubmit(() =>
 					REGISTER_USER({
@@ -19,7 +19,7 @@
 						:type="name.type"
 						:name="name.name"
 						:id="name.id"
-						v-model.trim="name.value"
+						v-model="name.value"
 						:rules="name.rules"
 					/>
 				</div>
@@ -55,7 +55,7 @@
 					/>
 				</div>
 				<div class="form-group">
-					<button class="btn">Register</button>
+					<button class="btn">Sign up</button>
 				</div>
 			</template>
 		</FormWrapper>
@@ -83,12 +83,11 @@ export default {
 	data() {
 		return {
 			name: {
-				label: 'Name',
+				label: 'Full name',
 				type: 'text',
 				value: null,
 				rules: {
 					required: true,
-					alpha: true,
 				},
 				name: 'name',
 				id: 'name',
