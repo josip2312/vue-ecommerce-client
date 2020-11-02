@@ -1,19 +1,31 @@
 <template>
 	<ValidationObserver v-slot="{ handleSubmit }" slim>
+		<!-- eslint-disable -->
 		<FormWrapper
 			className="wider"
 			title="Create product"
 			@submit.prevent.native="
 				handleSubmit(() =>
-					CREATE_PRODUCT({
-						name: name.value,
-						price: price.value,
-						brand: brand.value,
-						inStock: inStock.value,
-						category: category.value,
-						image: imagePath,
-						description: description.value,
-					}),
+					editing
+						? EDIT_PRODUCT({
+								name: name.value,
+								price: price.value,
+								brand: brand.value,
+								inStock: inStock.value,
+								category: category.value,
+								image: imagePath,
+								description: description.value,
+								id: $route.params.id,
+						  })
+						: CREATE_PRODUCT({
+								name: name.value,
+								price: price.value,
+								brand: brand.value,
+								inStock: inStock.value,
+								category: category.value,
+								image: imagePath,
+								description: description.value,
+						  }),
 				)
 			"
 		>
@@ -36,6 +48,7 @@
 						:id="price.id"
 						v-model="price.value"
 						:rules="price.rules"
+						step="0.01"
 					/>
 				</div>
 				<div class="form-group">
@@ -103,7 +116,7 @@ import FormInput from '@/components/form/FormInput';
 import FormTextarea from '@/components/form/FormTextarea';
 import { ValidationObserver } from 'vee-validate';
 
-import { CREATE_PRODUCT } from '@/store/constants/action_types';
+import { EDIT_PRODUCT, CREATE_PRODUCT } from '@/store/constants/action_types';
 
 import axios from 'axios';
 import { mapActions } from 'vuex';
@@ -120,13 +133,14 @@ export default {
 	data() {
 		return {
 			selectedFile: null,
-			url: null,
-			imagePath: '',
+			url: this.$route.params.image,
+			imagePath: this.$route.params.image || '',
+			editing: this.$route.params.editing,
 
 			name: {
 				label: 'Name',
 				type: 'text',
-				value: null,
+				value: this.$route.params.name || null,
 				rules: {
 					required: true,
 				},
@@ -136,10 +150,10 @@ export default {
 			price: {
 				label: 'Price',
 				type: 'number',
-				value: null,
+				value: this.$route.params.price || null,
 				rules: {
 					required: true,
-					numeric: true,
+					double: true,
 				},
 				name: 'price',
 				id: 'price',
@@ -147,7 +161,7 @@ export default {
 			brand: {
 				label: 'Brand',
 				type: 'text',
-				value: null,
+				value: this.$route.params.brand || null,
 				rules: {
 					required: true,
 				},
@@ -157,7 +171,7 @@ export default {
 			inStock: {
 				label: 'In stock',
 				type: 'number',
-				value: null,
+				value: this.$route.params.inStock || null,
 				rules: {
 					required: true,
 					numeric: true,
@@ -168,7 +182,7 @@ export default {
 			category: {
 				label: 'Category',
 				type: 'text',
-				value: null,
+				value: this.$route.params.category || null,
 				rules: {
 					required: true,
 				},
@@ -184,7 +198,7 @@ export default {
 			},
 			description: {
 				label: 'Description',
-				value: null,
+				value: this.$route.params.description || null,
 				name: 'description',
 				id: 'description',
 
@@ -195,7 +209,7 @@ export default {
 		};
 	},
 	methods: {
-		...mapActions([CREATE_PRODUCT]),
+		...mapActions([EDIT_PRODUCT, CREATE_PRODUCT]),
 		async setSelectedFile(e) {
 			this.selectedFile = e.target.files[0];
 			const file = e.target.files[0];

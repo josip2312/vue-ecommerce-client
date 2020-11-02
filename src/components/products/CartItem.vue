@@ -9,15 +9,27 @@
 				<div class="cart-item-price">$ {{ product.price }}</div>
 			</div>
 			<div class="info-right">
-				<select class="cart-item-instock" :value="product.quantity">
+				<select
+					class="cart-item-instock"
+					:value="product.quantity"
+					@change="
+						ADD_TO_CART({
+							product,
+							quantity: $event.target.value,
+						})
+					"
+				>
 					<option
-						v-for="(item, index) in product.quantity"
+						v-for="(item, index) in product.inStock"
 						:key="index"
 					>
 						{{ item }}
 					</option>
 				</select>
-				<button class="cart-item-delete">
+				<button
+					class="cart-item-delete"
+					@click="REMOVE_FROM_CART(product._id)"
+				>
 					<img src="@/assets/icons/trash.svg" alt="Delete" />
 				</button>
 			</div>
@@ -26,6 +38,8 @@
 </template>
 
 <script>
+import { REMOVE_FROM_CART, ADD_TO_CART } from '@/store/constants/action_types';
+import { mapActions } from 'vuex';
 export default {
 	name: 'CartItem',
 
@@ -33,6 +47,9 @@ export default {
 		product: {
 			type: Object,
 		},
+	},
+	methods: {
+		...mapActions([REMOVE_FROM_CART, ADD_TO_CART]),
 	},
 };
 </script>

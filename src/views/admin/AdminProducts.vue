@@ -1,5 +1,5 @@
 <template>
-	<div class="products spacing">
+	<section class="products container spacing">
 		<div class="products-top">
 			<h3 class="heading-3">
 				Products
@@ -17,7 +17,8 @@
 			:product="product"
 		>
 		</AdminProduct>
-	</div>
+		<div class="no-products" v-if="products.length < 1">No products</div>
+	</section>
 </template>
 
 <script>
@@ -25,7 +26,7 @@ import AdminProduct from '@/components/admin/AdminProduct';
 
 import { mapState } from 'vuex';
 export default {
-	name: 'ProductsList',
+	name: 'AdminProducts',
 	components: {
 		AdminProduct,
 	},
@@ -39,16 +40,18 @@ export default {
 
 <style lang="scss" scoped>
 .products {
-	width: 80%;
-	max-width: 120rem;
-	margin: 0 auto;
-	padding: 7.5rem 0;
-
 	&-top {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		justify-content: space-between;
 		margin-bottom: 5rem;
+		.heading-3 {
+			margin-right: 1.5rem;
+			@media only screen and(max-width:$vp-6) {
+				padding-bottom: 2.5rem;
+			}
+		}
 	}
 }
 </style>

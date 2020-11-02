@@ -59,7 +59,6 @@ export default {
 		margin: 2rem 0;
 
 		label {
-			font-weight: 600;
 			text-transform: uppercase;
 			letter-spacing: 1px;
 

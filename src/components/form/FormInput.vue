@@ -8,6 +8,7 @@
 			:placeholder="placeholder"
 			autocomplete="on"
 			:value="value"
+			:step="step"
 			@input="$emit('input', $event.target.value)"
 		/>
 		<p>{{ v.errors[0] }}</p>
@@ -28,7 +29,6 @@ export default {
 			default: 'text',
 		},
 		value: {
-			type: String,
 			default: '',
 		},
 		label: { type: String, required: true },
@@ -51,6 +51,10 @@ export default {
 		vid: {
 			type: String,
 			default: undefined,
+		},
+		step: {
+			type: String,
+			default: '1',
 		},
 	},
 };

@@ -25,7 +25,7 @@
 		<router-link :to="{ name: 'Index' }" class="nav-link">
 			Home
 		</router-link>
-		<router-link :to="{ name: 'Cart' }" class="nav-link" v-if="!isAdmin">
+		<router-link :to="{ name: 'Cart' }" class="nav-link">
 			Cart
 		</router-link>
 	</nav>

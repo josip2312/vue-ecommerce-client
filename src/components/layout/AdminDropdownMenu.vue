@@ -7,7 +7,7 @@
 		<router-link class="dropdown-link" :to="{ name: 'Users' }">
 			Users
 		</router-link>
-		<router-link class="dropdown-link" :to="{ name: 'ProductsList' }">
+		<router-link class="dropdown-link" :to="{ name: 'AdminProducts' }">
 			Products
 		</router-link>
 		<router-link class="dropdown-link" :to="{ name: 'Orders' }">

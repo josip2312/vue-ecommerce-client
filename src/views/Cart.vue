@@ -1,17 +1,22 @@
 <template>
-	<section class="cart">
+	<section class="cart container">
 		<CartItem
 			v-for="product in cart"
 			:key="product._id"
 			:product="product"
 		/>
-		{{ subtotal }}
+		<div class="subtotal spacing-sm">
+			<h4 class="heading-4">Subtotal ({{ itemsInCart }}) items</h4>
+			<div class="total-price">$ {{ subtotal }}</div>
+			<button class="btn">Proceed to checkout</button>
+		</div>
 	</section>
 </template>
 
 <script>
 import CartItem from '@/components/products/CartItem';
 import { mapState } from 'vuex';
+
 export default {
 	name: 'Cart',
 	components: {
@@ -26,7 +31,14 @@ export default {
 			let sum = this.cart.reduce((acc, item) => {
 				return acc + item.quantity * item.price;
 			}, 0);
-			console.log(sum);
+
+			return sum;
+		},
+		itemsInCart() {
+			let sum = this.cart.reduce((acc, item) => {
+				return acc + parseInt(item.quantity);
+			}, 0);
+
 			return sum;
 		},
 	},
@@ -35,13 +47,15 @@ export default {
 
 <style lang="scss" scoped>
 .cart {
-	padding: 7.5rem 0;
-	width: 80%;
-	max-width: 120rem;
-	margin: 0 auto;
 }
 .subtotal {
 	text-align: right;
-	padding: 2rem 0;
+	padding: 3rem 0;
+	.items-in-cart {
+	}
+	.total-price {
+		font-size: 2rem;
+		font-weight: 600;
+	}
 }
 </style>

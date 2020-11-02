@@ -9,8 +9,10 @@ import {
 	FETCH_SINGLE_PRODUCT,
 	REVIEW_PRODUCT,
 	CREATE_PRODUCT,
+	EDIT_PRODUCT,
 	DELETE_PRODUCT,
 	ADD_TO_CART,
+	REMOVE_FROM_CART,
 } from '../constants/action_types';
 
 import {
@@ -20,7 +22,9 @@ import {
 	SET_PRODUCT_ERROR,
 	SET_DELETE_PRODUCT,
 	PUSH_CREATED_PRODUCT,
-	SET_CART,
+	PUSH_UPDATED_PRODUCT,
+	SET_ADD_CART,
+	SET_REMOVE_CART,
 } from '../constants/mutation_types';
 
 Vue.use(Vuex);
@@ -38,21 +42,24 @@ export default {
 	},
 	getters: {},
 	mutations: {
-		[SET_CART]: (state, productData) => {
+		[SET_ADD_CART]: (state, productData) => {
 			const { product, quantity } = productData;
-			//adding quantity field for cart
 
 			let found = state.cart.findIndex(
 				(prod) => product._id === prod._id,
 			);
+
 			if (found !== -1) {
-				console.log(state.cart[found]);
-				state.cart[found].quantity += +quantity;
+				state.cart[found].quantity = quantity;
+				console.log(quantity);
 				return;
 			} else {
 				product.quantity = quantity;
 				state.cart.push(product);
 			}
+		},
+		[SET_REMOVE_CART]: (state, id) => {
+			state.cart = state.cart.filter((cartItem) => cartItem._id !== id);
 		},
 		[SET_PRODUCTS]: (state, data) => {
 			state.products = data;
@@ -80,18 +87,32 @@ export default {
 		[PUSH_CREATED_PRODUCT]: (state, product) => {
 			state.products.push(product);
 		},
+		[PUSH_UPDATED_PRODUCT]: (state, product) => {
+			let index = state.products.findIndex(
+				(prod) => prod._id === product._id,
+			);
+			state.products[index] = product;
+		},
 	},
 	actions: {
 		[FETCH_PRODUCTS]: async ({ commit }) => {
-			const res = await axios.get('products');
+			try {
+				const res = await axios.get('products');
 
-			commit(SET_PRODUCTS, res.data);
+				commit(SET_PRODUCTS, res.data);
+			} catch (error) {
+				console.error(error);
+			}
 		},
 		[FETCH_SINGLE_PRODUCT]: async ({ commit }, id) => {
-			const res = await axios.get(`products/${id}`);
-			commit(SET_SINGLE_PRODUCT, res.data);
-			if (router.history.currentRoute !== 'ProductDetails') {
-				router.push({ name: 'ProductDetails' });
+			try {
+				const res = await axios.get(`products/${id}`);
+				commit(SET_SINGLE_PRODUCT, res.data);
+				if (router.history.current.name !== 'ProductDetails') {
+					router.push({ name: 'ProductDetails' });
+				}
+			} catch (error) {
+				console.error(error);
 			}
 		},
 
@@ -108,6 +129,34 @@ export default {
 			} catch (error) {
 				console.log(error.response);
 				commit(SET_PRODUCT_ERROR, error.response.data.message);
+			}
+		},
+		[EDIT_PRODUCT]: async ({ commit }, productData) => {
+			try {
+				const {
+					id,
+					name,
+					price,
+					brand,
+					inStock,
+					category,
+					image,
+					description,
+				} = productData;
+				const { data } = await axios.put(`/products/${id}`, {
+					name,
+					price,
+					brand,
+					inStock,
+					category,
+					image,
+					description,
+				});
+
+				commit(PUSH_UPDATED_PRODUCT, data);
+				router.push({ name: 'AdminProducts' });
+			} catch (error) {
+				console.error(error);
 			}
 		},
 		[DELETE_PRODUCT]: async ({ commit }, id) => {
@@ -143,14 +192,20 @@ export default {
 				});
 
 				commit(PUSH_CREATED_PRODUCT, data);
+				router.push({ name: 'AdminProducts' });
 			} catch (error) {
 				console.error(error);
 			}
 		},
-		[ADD_TO_CART]: async ({ commit }, productData) => {
-			console.log(productData);
-			commit(SET_CART, productData);
-			router.push({ name: 'Cart' });
+		[ADD_TO_CART]: ({ commit }, productData) => {
+			commit(SET_ADD_CART, productData);
+
+			if (router.history.current.name !== 'Cart') {
+				router.push({ name: 'Cart' });
+			}
+		},
+		[REMOVE_FROM_CART]: ({ commit }, productId) => {
+			commit(SET_REMOVE_CART, productId);
 		},
 	},
 };

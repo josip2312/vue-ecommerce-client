@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="product-details">
 			<div class="product-details-image">
-				<img src="@/assets/images/product.jpg" alt="A product" />
+				<img :src="product.image" :alt="product.name" />
 			</div>
 			<div class="product-details-info spacing">
 				<h2 class="heading-2 product-details-name">
@@ -17,9 +17,7 @@
 					</div>
 				</div>
 				<div class="product-details-description">
-					{{ product.description }} Lorem, ipsum dolor sit amet
-					consectetur adipisicing elit. Vel nemo ipsam, quod
-					consequuntur pariatur expedita!
+					{{ product.description }}
 				</div>
 				<div class="row buttons">
 					<select class="product-details-instock" v-model="quantity">
@@ -98,12 +96,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-	padding: 7.5rem 0;
-	width: 80%;
-	max-width: 120rem;
-	margin: 0 auto;
-}
 .product-details {
 	display: flex;
 	flex-direction: column;

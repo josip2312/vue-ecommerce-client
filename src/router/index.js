@@ -62,6 +62,7 @@ const routes = [
 		component: () =>
 			import(/* webpackChunkName: "about" */ '@/views/Profile.vue'),
 	},
+
 	{
 		path: '/cart',
 		name: 'Cart',
@@ -75,13 +76,13 @@ const routes = [
 	//admin routes
 	{
 		path: '/admin/products',
-		name: 'ProductsList',
+		name: 'AdminProducts',
 		// route level code-splitting
 		// this generates a separate chunk (about.[hash].js) for this route
 		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(
-				/* webpackChunkName: "about" */ '@/views/admin/ProductsList.vue'
+				/* webpackChunkName: "about" */ '@/views/admin/AdminProducts.vue'
 			),
 	},
 	{
@@ -112,6 +113,17 @@ const routes = [
 		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(/* webpackChunkName: "about" */ '@/views/admin/Orders.vue'),
+	},
+	{
+		path: '/admin/edit-user',
+		name: 'EditUser',
+		// route level code-splitting
+		// this generates a separate chunk (about.[hash].js) for this route
+		// which is lazy-loaded when the route is visited.
+		component: () =>
+			import(
+				/* webpackChunkName: "about" */ '@/views/admin/EditUser.vue'
+			),
 	},
 ];
 

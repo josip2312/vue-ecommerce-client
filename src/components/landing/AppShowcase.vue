@@ -1,5 +1,5 @@
 <template>
-	<header class="showcase">
+	<header class="showcase ">
 		<div class="showcase-heading spacing">
 			<h1 class="heading-1">Vue ecommerce</h1>
 			<p class="heading-desc">

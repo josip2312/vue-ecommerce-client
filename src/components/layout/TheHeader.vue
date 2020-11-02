@@ -5,16 +5,23 @@
 				Logo
 			</router-link>
 
-			<button class="nav-toggle" @click="toggleSidebar">
+			<button ref="button-menu" class="nav-toggle" @click="toggleSidebar">
 				<span
 					class="hamburger"
 					:class="{ active: isSidebarVisible }"
 				></span>
 			</button>
-			<Navigation :isSidebarVisible="isSidebarVisible" />
+			<Navigation
+				:isSidebarVisible="isSidebarVisible"
+				v-clickOutside="{
+					exclude: ['button-menu'],
+					handler: 'hideSidebar',
+				}"
+			/>
 
 			<div class="user-dropdown-toggle">
 				<button
+					ref="button-user"
 					class="nav-link user-toggle-btn"
 					@click="toggleUserDropdown"
 					v-if="isLoggedIn"
@@ -23,12 +30,17 @@
 					<img src="@/assets/icons/chevronDown.svg" alt="" />
 				</button>
 				<UserDropdownMenu
+					v-clickOutside="{
+						exclude: ['button-user'],
+						handler: 'hideUserDropdown',
+					}"
 					:isUserDropdownVisible="isUserDropdownVisible"
 				/>
 			</div>
 
 			<div class="admin-dropdown-toggle">
 				<button
+					ref="button-admin"
 					class="nav-link admin-toggle-btn"
 					@click="toggleAdminDropdown"
 					v-if="isLoggedIn && isAdmin"
@@ -38,6 +50,10 @@
 				</button>
 				<AdminDropdownMenu
 					:isAdminDropdownVisible="isAdminDropdownVisible"
+					v-clickOutside="{
+						exclude: ['button-admin'],
+						handler: 'hideAdminDropdown',
+					}"
 				/>
 			</div>
 		</div>
@@ -49,6 +65,8 @@ import { mapGetters } from 'vuex';
 import Navigation from './Navigation';
 import UserDropdownMenu from './UserDropdownMenu';
 import AdminDropdownMenu from './AdminDropdownMenu';
+
+import clickOutside from '@/directives/click-outside';
 
 export default {
 	name: 'TheHeader',
@@ -75,9 +93,21 @@ export default {
 		toggleUserDropdown() {
 			this.isUserDropdownVisible = !this.isUserDropdownVisible;
 		},
+		hideSidebar() {
+			this.isSidebarVisible = false;
+		},
+		hideUserDropdown() {
+			this.isUserDropdownVisible = false;
+		},
+		hideAdminDropdown() {
+			this.isAdminDropdownVisible = false;
+		},
 		toggleAdminDropdown() {
 			this.isAdminDropdownVisible = !this.isAdminDropdownVisible;
 		},
+	},
+	directives: {
+		clickOutside,
 	},
 };
 </script>

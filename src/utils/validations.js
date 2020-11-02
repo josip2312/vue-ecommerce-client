@@ -6,6 +6,7 @@ import {
 	email,
 	alpha,
 	confirmed,
+	double,
 	numeric,
 	min,
 } from 'vee-validate/dist/rules';
@@ -61,11 +62,14 @@ extend('confirmed', {
 	...confirmed,
 	message: 'Passwords do not match',
 });
+extend('double', {
+	...double,
+	message: 'This field has to be a number',
+});
 extend('numeric', {
 	...numeric,
 	message: 'This field has to be a number',
 });
-
 extend('minmax_value', {
 	validate(value, { min, max }) {
 		return value >= min && value <= max;
