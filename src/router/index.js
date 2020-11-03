@@ -4,6 +4,8 @@ import Index from '../views/Index.vue';
 
 Vue.use(VueRouter);
 
+//protect routes
+
 const routes = [
 	{
 		path: '/',
@@ -73,6 +75,40 @@ const routes = [
 			import(/* webpackChunkName: "about" */ '@/views/Cart.vue'),
 	},
 
+	{
+		path: '/shipping',
+		name: 'Shipping',
+		// route level code-splitting
+		// this generates a separate chunk (about.[hash].js) for this route
+		// which is lazy-loaded when the route is visited.
+		component: () =>
+			import(
+				/* webpackChunkName: "about" */ '@/views/orders/Shipping.vue'
+			),
+	},
+	{
+		path: '/payment',
+		name: 'Payment',
+		// route level code-splitting
+		// this generates a separate chunk (about.[hash].js) for this route
+		// which is lazy-loaded when the route is visited.
+		component: () =>
+			import(
+				/* webpackChunkName: "about" */ '@/views/orders/Payment.vue'
+			),
+	},
+	{
+		path: '/place-order',
+		name: 'PlaceOrder',
+		// route level code-splitting
+		// this generates a separate chunk (about.[hash].js) for this route
+		// which is lazy-loaded when the route is visited.
+		component: () =>
+			import(
+				/* webpackChunkName: "about" */ '@/views/orders/PlaceOrder.vue'
+			),
+	},
+
 	//admin routes
 	{
 		path: '/admin/products',
@@ -87,12 +123,14 @@ const routes = [
 	},
 	{
 		path: '/admin/users',
-		name: 'Users',
+		name: 'AdminUsers',
 		// route level code-splitting
 		// this generates a separate chunk (about.[hash].js) for this route
 		// which is lazy-loaded when the route is visited.
 		component: () =>
-			import(/* webpackChunkName: "about" */ '@/views/admin/Users.vue'),
+			import(
+				/* webpackChunkName: "about" */ '@/views/admin/AdminUsers.vue'
+			),
 	},
 	{
 		path: '/admin/create-product',
@@ -107,12 +145,14 @@ const routes = [
 	},
 	{
 		path: '/admin/orders',
-		name: 'Orders',
+		name: 'AdminOrders',
 		// route level code-splitting
 		// this generates a separate chunk (about.[hash].js) for this route
 		// which is lazy-loaded when the route is visited.
 		component: () =>
-			import(/* webpackChunkName: "about" */ '@/views/admin/Orders.vue'),
+			import(
+				/* webpackChunkName: "about" */ '@/views/admin/AdminOrders.vue'
+			),
 	},
 	{
 		path: '/admin/edit-user',

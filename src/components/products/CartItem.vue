@@ -1,40 +1,42 @@
 <template>
-	<div class="cart-item">
-		<div class="cart-item-image">
-			<img :src="product.image" alt="Product image" />
-		</div>
-		<div class="cart-item-info">
-			<div class="info-left">
-				<div class="cart-item-name">{{ product.name }}</div>
-				<div class="cart-item-price">$ {{ product.price }}</div>
+	<transition mode="out-in" name="fade">
+		<div class="cart-item">
+			<div class="cart-item-image">
+				<img :src="cartItem.image" :alt="cartItem.name" />
 			</div>
-			<div class="info-right">
-				<select
-					class="cart-item-instock"
-					:value="product.quantity"
-					@change="
-						ADD_TO_CART({
-							product,
-							quantity: $event.target.value,
-						})
-					"
-				>
-					<option
-						v-for="(item, index) in product.inStock"
-						:key="index"
+			<div class="cart-item-info">
+				<div class="info-left">
+					<div class="cart-item-name">{{ cartItem.name }}</div>
+					<div class="cart-item-price">$ {{ cartItem.price }}</div>
+				</div>
+				<div class="info-right">
+					<select
+						class="cart-item-instock"
+						:value="cartItem.quantity"
+						@change="
+							ADD_TO_CART({
+								cartItem,
+								quantity: $event.target.value,
+							})
+						"
 					>
-						{{ item }}
-					</option>
-				</select>
-				<button
-					class="cart-item-delete"
-					@click="REMOVE_FROM_CART(product._id)"
-				>
-					<img src="@/assets/icons/trash.svg" alt="Delete" />
-				</button>
+						<option
+							v-for="(item, index) in cartItem.inStock"
+							:key="index"
+						>
+							{{ item }}
+						</option>
+					</select>
+					<button
+						class="cart-item-delete"
+						@click="REMOVE_FROM_CART(cartItem.product)"
+					>
+						<img src="@/assets/icons/trash.svg" alt="Delete" />
+					</button>
+				</div>
 			</div>
 		</div>
-	</div>
+	</transition>
 </template>
 
 <script>
@@ -44,7 +46,7 @@ export default {
 	name: 'CartItem',
 
 	props: {
-		product: {
+		cartItem: {
 			type: Object,
 		},
 	},
@@ -57,12 +59,16 @@ export default {
 <style lang="scss" scoped>
 .cart-item {
 	display: flex;
-
-	align-items: center;
+	flex-direction: column;
 	background-color: var(--grey-light);
 	padding: 2rem 1.5rem;
 	border-radius: 0.5rem;
-
+	&:not(:last-child) {
+		margin-bottom: 2.5rem;
+	}
+	@media only screen and(min-width:$vp-9) {
+		flex-direction: row;
+	}
 	&-info {
 		flex: 1;
 		display: flex;
@@ -82,8 +88,15 @@ export default {
 		}
 	}
 	&-image {
-		max-width: 25rem;
-		margin-right: 2.5rem;
+		align-self: center;
+		max-width: 35rem;
+		margin-bottom: 2.5rem;
+		@media only screen and(min-width:$vp-9) {
+			max-width: 25rem;
+
+			margin-bottom: 0;
+			margin-right: 2.5rem;
+		}
 	}
 	&-name,
 	&-price,

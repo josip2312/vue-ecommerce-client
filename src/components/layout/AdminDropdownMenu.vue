@@ -4,13 +4,13 @@
 		class="dropdown"
 		:class="{ isAdminDropdownVisible: isAdminDropdownVisible }"
 	>
-		<router-link class="dropdown-link" :to="{ name: 'Users' }">
+		<router-link class="dropdown-link" :to="{ name: 'AdminUsers' }">
 			Users
 		</router-link>
 		<router-link class="dropdown-link" :to="{ name: 'AdminProducts' }">
 			Products
 		</router-link>
-		<router-link class="dropdown-link" :to="{ name: 'Orders' }">
+		<router-link class="dropdown-link" :to="{ name: 'AdminOrders' }">
 			Orders
 		</router-link>
 	</div>

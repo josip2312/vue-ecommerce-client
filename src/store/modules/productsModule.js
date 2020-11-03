@@ -24,6 +24,7 @@ import {
 	PUSH_CREATED_PRODUCT,
 	PUSH_UPDATED_PRODUCT,
 	SET_ADD_CART,
+	CLEAR_CART,
 	SET_REMOVE_CART,
 } from '../constants/mutation_types';
 
@@ -42,24 +43,28 @@ export default {
 	},
 	getters: {},
 	mutations: {
-		[SET_ADD_CART]: (state, productData) => {
-			const { product, quantity } = productData;
+		[SET_ADD_CART]: (state, cartData) => {
+			const { cartItem, quantity } = cartData;
 
 			let found = state.cart.findIndex(
-				(prod) => product._id === prod._id,
+				(prod) => cartItem.product === prod.product,
 			);
 
 			if (found !== -1) {
 				state.cart[found].quantity = quantity;
-				console.log(quantity);
-				return;
 			} else {
-				product.quantity = quantity;
-				state.cart.push(product);
+				cartItem.quantity = quantity;
+
+				state.cart.push(cartItem);
 			}
 		},
 		[SET_REMOVE_CART]: (state, id) => {
-			state.cart = state.cart.filter((cartItem) => cartItem._id !== id);
+			state.cart = state.cart.filter(
+				(cartItem) => cartItem.product !== id,
+			);
+		},
+		[CLEAR_CART]: (state) => {
+			state.cart = [];
 		},
 		[SET_PRODUCTS]: (state, data) => {
 			state.products = data;
@@ -197,15 +202,15 @@ export default {
 				console.error(error);
 			}
 		},
-		[ADD_TO_CART]: ({ commit }, productData) => {
-			commit(SET_ADD_CART, productData);
+		[ADD_TO_CART]: ({ commit }, cartItem) => {
+			commit(SET_ADD_CART, cartItem);
 
 			if (router.history.current.name !== 'Cart') {
 				router.push({ name: 'Cart' });
 			}
 		},
-		[REMOVE_FROM_CART]: ({ commit }, productId) => {
-			commit(SET_REMOVE_CART, productId);
+		[REMOVE_FROM_CART]: ({ commit }, cartItemId) => {
+			commit(SET_REMOVE_CART, cartItemId);
 		},
 	},
 };

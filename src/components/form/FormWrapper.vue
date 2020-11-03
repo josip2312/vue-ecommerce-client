@@ -44,7 +44,7 @@ export default {
 	padding: 2.5rem;
 
 	background: var(--font-secondary);
-	box-shadow: 0 2px 8px 0 hsla(0, 0%, 0%, 0.3);
+	box-shadow: 0 2px 8px 0 hsla(0, 0%, 0%, 0.2);
 	border-radius: 3px;
 
 	.heading-2 {
@@ -52,9 +52,6 @@ export default {
 	}
 
 	.form-group {
-		display: flex;
-		flex-direction: column;
-
 		position: relative;
 		margin: 2rem 0;
 
@@ -67,6 +64,9 @@ export default {
 		span {
 			display: flex;
 			flex-direction: column;
+		}
+		.btn {
+			width: 100%;
 		}
 	}
 }

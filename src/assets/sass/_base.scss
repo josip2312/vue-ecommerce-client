@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 html {
 	box-sizing: border-box;
 	font-size: 62.5%;
@@ -30,6 +29,7 @@ body {
 }
 .heading-1 {
 	font-size: 4.8rem;
+	font-weight: 600;
 	line-height: 1;
 }
 .heading-2 {

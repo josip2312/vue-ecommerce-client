@@ -19,12 +19,11 @@
 				}"
 			/>
 
-			<div class="user-dropdown-toggle">
+			<div class="user-dropdown-toggle" v-if="isLoggedIn">
 				<button
 					ref="button-user"
 					class="nav-link user-toggle-btn"
 					@click="toggleUserDropdown"
-					v-if="isLoggedIn"
 				>
 					<img class="user" src="@/assets/icons/user.svg" alt="" />
 					<img src="@/assets/icons/chevronDown.svg" alt="" />
@@ -38,12 +37,11 @@
 				/>
 			</div>
 
-			<div class="admin-dropdown-toggle">
+			<div class="admin-dropdown-toggle" v-if="isLoggedIn && isAdmin">
 				<button
 					ref="button-admin"
 					class="nav-link admin-toggle-btn"
 					@click="toggleAdminDropdown"
-					v-if="isLoggedIn && isAdmin"
 				>
 					<span>Admin</span>
 					<img src="@/assets/icons/chevronDown.svg" alt="" />
@@ -126,7 +124,7 @@ export default {
 
 .wrapper {
 	position: relative;
-	width: 80%;
+	width: 85%;
 	margin: 0 auto;
 	max-width: 120rem;
 

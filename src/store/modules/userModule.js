@@ -21,6 +21,7 @@ import {
 	SET_USER_DELETED,
 	SET_USER_DETAILS,
 	SET_EDITING_USER,
+	CLEAR_CART,
 } from '../constants/mutation_types';
 
 Vue.use(Vuex);
@@ -84,6 +85,7 @@ export default {
 		},
 		[LOGOUT_USER]: async ({ commit }) => {
 			commit(SET_LOGGED_OUT);
+			commit(CLEAR_CART, null, { root: true });
 			location.reload();
 		},
 		[REGISTER_USER]: async ({ commit }, userData) => {
@@ -138,7 +140,7 @@ export default {
 				});
 
 				commit(SET_EDITING_USER, data);
-				router.push({ name: 'Users' });
+				router.push({ name: 'AdminUsers' });
 			} catch (error) {
 				console.error(error);
 			}

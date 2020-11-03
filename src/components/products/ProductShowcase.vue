@@ -5,8 +5,7 @@
 		</div>
 		<div class="product-info spacing">
 			<div class="product-heading">
-				<div class="brand">{{ product.brand }}</div>
-				<div class="name">{{ product.name }}</div>
+				<div class="name">{{ product.brand }} {{ product.name }}</div>
 			</div>
 			<div class="product-ratings">
 				<StarRating :rating="product.rating" />
@@ -56,13 +55,9 @@ export default {
 .product-info {
 	padding: 1rem 3.5rem;
 	.product-heading {
-		display: flex;
-		align-items: center;
 		font-size: 1.8rem;
 		font-weight: 600;
-		.brand {
-			margin-right: 1.5rem;
-		}
+		color: var(--primary-dark);
 	}
 	.product-ratings {
 		display: flex;

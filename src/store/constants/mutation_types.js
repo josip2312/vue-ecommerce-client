@@ -8,7 +8,15 @@ export const PUSH_CREATED_PRODUCT = 'PUSH_CREATED_PRODUCT';
 export const PUSH_UPDATED_PRODUCT = 'PUSH_UPDATED_PRODUCT';
 
 export const SET_ADD_CART = 'SET_ADD_CART';
+export const CLEAR_CART = 'CLEAR_CART';
 export const SET_REMOVE_CART = 'SET_REMOVE_CART';
+
+//orders
+export const SET_SHIPPING_INFO = 'SET_SHIPPING_INFO';
+export const SET_PAYMENT_INFO = 'SET_PAYMENT_INFO';
+export const PUSH_CREATED_ORDER = 'PUSH_CREATED_ORDER';
+export const SET_MY_ORDERS = 'SET_MY_ORDERS';
+export const SET_ALL_ORDERS = 'SET_ALL_ORDERS';
 
 //users
 export const SET_USER = 'SET_USER';

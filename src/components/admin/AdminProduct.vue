@@ -1,24 +1,43 @@
 <template>
-	<div class="product" @click="FETCH_SINGLE_PRODUCT(product._id)">
-		<div class="product-id">
-			{{ product._id }}
-		</div>
-		<div class="product-main">
-			<div class="product-name">
-				{{ product.name }}
+	<AdminItemContainer
+		@click.native="FETCH_SINGLE_PRODUCT(product._id)"
+		className="pointer"
+	>
+		<template #item-content>
+			<div class="product-id">
+				<span class="tag">ID: </span>
+				<span>
+					{{ product._id }}
+				</span>
 			</div>
-			<div class="product-price">$ {{ product.price }}</div>
-		</div>
-		<div class="product-sec">
+		</template>
+		<template #item-main>
+			<div class="product-name">
+				<span class="tag">Name: </span>
+				<span>
+					{{ product.name }}
+				</span>
+			</div>
+			<div class="product-price">
+				<span class="tag">Price: </span>
+				<span>$ {{ product.price }} </span>
+			</div>
+		</template>
+		<template #item-sec>
 			<div class="product-category">
-				{{ product.category }}
+				<span class="tag">Category: </span>
+				<span>
+					{{ product.category }}
+				</span>
 			</div>
 			<div class="product-brand">
-				{{ product.brand }}
+				<span class="tag">Brand: </span>
+				<span>
+					{{ product.brand }}
+				</span>
 			</div>
-		</div>
-
-		<div class="product-buttons">
+		</template>
+		<template #item-buttons>
 			<button
 				class="product-edit"
 				title="Edit"
@@ -33,11 +52,13 @@
 			>
 				<img src="@/assets/icons/trash.svg" alt="Delete" />
 			</button>
-		</div>
-	</div>
+		</template>
+	</AdminItemContainer>
 </template>
 
 <script>
+import AdminItemContainer from './AdminItemContainer';
+
 import {
 	DELETE_PRODUCT,
 	EDIT_PRODUCT,
@@ -50,6 +71,14 @@ export default {
 		product: {
 			type: Object,
 			required: true,
+		},
+	},
+	components: {
+		AdminItemContainer,
+	},
+	computed: {
+		productId() {
+			return this.product._id.slice(5) + '...';
 		},
 	},
 	methods: {
@@ -84,78 +113,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.product {
-	background-color: var(--grey-light);
-	padding: 2rem 1.5rem;
-	border-radius: 0.5rem;
-
-	cursor: pointer;
-	@media only screen and(min-width:$vp-12) {
-		display: flex;
-		align-items: center;
-	}
-	&-id {
-		flex: 1;
-		text-align: center;
-	}
-	&-main,
-	&-sec {
-		display: flex;
-		align-items: center;
-		justify-content: space-around;
-		& > * {
-			@media only screen and(min-width:$vp-12) {
-				flex: 1;
-			}
-		}
-		@media only screen and(min-width:$vp-12) {
-			justify-content: flex-start;
-			flex: 1;
-		}
-	}
-	&-buttons {
-		display: flex;
-		align-items: center;
-		justify-content: space-around;
-	}
-	&-name,
-	&-price,
-	&-category,
-	&-brand {
-		padding: 1.5rem 2rem;
-	}
-	&-name {
-	}
-	&-price {
-		font-weight: 600;
-	}
-	&-category {
-	}
-	&-brand {
-	}
-	&-edit,
-	&-delete {
-		cursor: pointer;
-		background: none;
-		border: none;
-		padding: 1.5rem 2rem;
-		flex-shrink: 0;
-	}
-	&-edit {
-		margin-right: 1rem;
-	}
-	&-delete {
-		background-color: var(--warning-light);
-		padding: 1rem;
-		border-radius: 3px;
-	}
-	img {
-		width: 2.5rem;
-		height: 2.5rem;
-	}
-	img:hover {
-		transform: scale(1.1);
-	}
-}
-</style>
+<style lang="scss" scoped></style>

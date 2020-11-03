@@ -1,14 +1,21 @@
 <template>
 	<section class="cart container">
+		<h3 class="heading-3">Cart</h3>
+
 		<CartItem
-			v-for="product in cart"
-			:key="product._id"
-			:product="product"
+			v-for="cartItem in cart"
+			:key="cartItem.product"
+			:cartItem="cartItem"
 		/>
+
+		<div v-if="cart.length < 1" class="no-cart">No items in cart</div>
+
 		<div class="subtotal spacing-sm">
 			<h4 class="heading-4">Subtotal ({{ itemsInCart }}) items</h4>
-			<div class="total-price">$ {{ subtotal }}</div>
-			<button class="btn">Proceed to checkout</button>
+			<div class="total-price">$ {{ addDecimals(subtotal) }}</div>
+			<router-link :to="{ name: 'Shipping' }" class="btn"
+				>Proceed to checkout</router-link
+			>
 		</div>
 	</section>
 </template>
@@ -42,11 +49,17 @@ export default {
 			return sum;
 		},
 	},
+	methods: {
+		addDecimals(num) {
+			return (Math.round(num * 100) / 100).toFixed(2);
+		},
+	},
 };
 </script>
 
 <style lang="scss" scoped>
-.cart {
+.heading-3 {
+	margin-bottom: 5rem;
 }
 .subtotal {
 	text-align: right;

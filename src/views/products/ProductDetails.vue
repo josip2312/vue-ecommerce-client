@@ -30,7 +30,18 @@
 					</select>
 					<button
 						class="btn"
-						@click.prevent="ADD_TO_CART({ product, quantity })"
+						@click.prevent="
+							ADD_TO_CART({
+								cartItem: {
+									product: product._id,
+									name: product.name,
+									image: product.image,
+									price: product.price,
+									inStock: product.inStock,
+								},
+								quantity,
+							})
+						"
 					>
 						Add to cart
 					</button>

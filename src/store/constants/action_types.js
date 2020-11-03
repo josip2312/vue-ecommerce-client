@@ -10,6 +10,13 @@ export const EDIT_PRODUCT = 'EDIT_PRODUCT';
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 
+//orders
+export const CREATE_ORDER = 'CREATE_ORDER';
+export const FETCH_MY_ORDERS = 'FETCH_MY_ORDERS';
+export const FETCH_ALL_ORDERS = 'FETCH_ALL_ORDERS';
+export const ADD_SHIPPING_INFO = 'ADD_SHIPPING_INFO';
+export const ADD_PAYMENT_INFO = 'ADD_PAYMENT_INFO';
+
 //users
 export const REGISTER_USER = 'REGISTER_USER';
 export const LOGIN_USER = 'LOGIN_USER';

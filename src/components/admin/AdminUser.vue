@@ -1,20 +1,36 @@
 <template>
-	<div class="user">
-		<div class="user-id">
-			{{ user._id }}
-		</div>
-		<div class="user-main">
+	<AdminItemContainer>
+		<template #item-content>
+			<div class="user-id">
+				<span class="tag">ID: </span>
+				<span>
+					{{ user._id }}
+				</span>
+			</div>
+		</template>
+		<template #item-main>
 			<div class="user-name">
-				{{ user.name }}
+				<span class="tag">Name: </span>
+				<span>
+					{{ user.name }}
+				</span>
 			</div>
 			<div class="user-email">
-				{{ user.email }}
+				<span class="tag">Email: </span>
+				<span>
+					{{ user.email }}
+				</span>
 			</div>
-		</div>
-		<div class="user-admin">
-			Role: {{ user.isAdmin ? 'Admin' : 'User' }}
-		</div>
-		<div class="user-buttons">
+		</template>
+		<template #item-sec>
+			<div class="user-admin">
+				<span class="tag">Role: </span>
+				<span>
+					{{ user.isAdmin ? 'Admin' : 'User' }}
+				</span>
+			</div>
+		</template>
+		<template #item-buttons>
 			<button
 				class="user-edit"
 				title="Edit"
@@ -29,13 +45,15 @@
 			>
 				<img src="@/assets/icons/trash.svg" alt="Delete" />
 			</button>
-		</div>
-	</div>
+		</template>
+	</AdminItemContainer>
 </template>
 
 <script>
+import AdminItemContainer from './AdminItemContainer';
+
 import { mapActions } from 'vuex';
-import { FETCH_SINGLE_USER } from '@/store/constants/action_types';
+import { FETCH_SINGLE_USER, DELETE_USER } from '@/store/constants/action_types';
 export default {
 	name: 'AdminUser',
 	props: {
@@ -44,73 +62,18 @@ export default {
 			required: true,
 		},
 	},
+	components: {
+		AdminItemContainer,
+	},
+	computed: {
+		userId() {
+			return this.user._id.slice(5) + '...';
+		},
+	},
 	methods: {
-		...mapActions([FETCH_SINGLE_USER]),
+		...mapActions([FETCH_SINGLE_USER, DELETE_USER]),
 	},
 };
 </script>
 
-<style lang="scss" scoped>
-.user {
-	background-color: var(--grey-light);
-	padding: 2rem 1.5rem;
-	border-radius: 0.5rem;
-
-	@media only screen and(min-width:$vp-10) {
-		display: flex;
-		align-items: center;
-	}
-	&-id {
-		text-align: center;
-	}
-	&-main {
-		display: flex;
-		align-items: center;
-		justify-content: space-around;
-		@media only screen and(min-width:$vp-10) {
-			flex: 1;
-		}
-	}
-	&-admin {
-		display: flex;
-		justify-content: center;
-	}
-
-	&-name,
-	&-email,
-	&-admin {
-		padding: 1.5rem;
-	}
-
-	&-buttons {
-		display: flex;
-		align-items: center;
-		justify-content: space-around;
-	}
-
-	&-edit,
-	&-delete {
-		cursor: pointer;
-		background: none;
-		border: none;
-		padding: 1.5rem;
-		flex-shrink: 0;
-	}
-	&-delete {
-		background-color: var(--warning-light);
-
-		border-radius: 3px;
-	}
-	&-edit {
-		margin-right: 1rem;
-	}
-
-	img {
-		width: 2.5rem;
-		height: 2.5rem;
-	}
-	img:hover {
-		transform: scale(1.1);
-	}
-}
-</style>
+<style lang="scss" scoped></style>
