@@ -22,8 +22,11 @@ export default {
 
 	width: 100%;
 	max-width: 60rem;
-	margin: 0 auto;
 
+	margin: 0 auto;
+	@media only screen and(min-width:$vp-12) {
+		min-width: auto;
+	}
 	.form-group {
 		position: relative;
 		margin: 2rem 0;
@@ -41,7 +44,9 @@ export default {
 	}
 }
 .align-left {
-	margin: 0;
-	max-width: 50rem;
+	@media only screen and(min-width:$vp-12) {
+		margin: 0;
+		max-width: 50rem;
+	}
 }
 </style>

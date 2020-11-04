@@ -4,13 +4,25 @@
 		class="dropdown"
 		:class="{ isAdminDropdownVisible: isAdminDropdownVisible }"
 	>
-		<router-link class="dropdown-link" :to="{ name: 'AdminUsers' }">
+		<router-link
+			class="dropdown-link"
+			:to="{ name: 'AdminUsers' }"
+			@click.native="$emit('hide-admin-dropdown')"
+		>
 			Users
 		</router-link>
-		<router-link class="dropdown-link" :to="{ name: 'AdminProducts' }">
+		<router-link
+			class="dropdown-link"
+			:to="{ name: 'AdminProducts' }"
+			@click.native="$emit('hide-admin-dropdown')"
+		>
 			Products
 		</router-link>
-		<router-link class="dropdown-link" :to="{ name: 'AdminOrders' }">
+		<router-link
+			class="dropdown-link"
+			:to="{ name: 'AdminOrders' }"
+			@click.native="$emit('hide-admin-dropdown')"
+		>
 			Orders
 		</router-link>
 	</div>
@@ -40,7 +52,7 @@ export default {
 .dropdown {
 	position: absolute;
 	left: -1rem;
-	padding: 1rem 2.5rem;
+	padding: 1rem 0;
 	top: 100%;
 
 	display: flex;
@@ -56,7 +68,7 @@ export default {
 	.dropdown-link {
 		color: var(--font-secondary);
 		font-size: 1.8rem;
-		padding: 0.5rem 0;
+		padding: 1rem 3rem;
 
 		opacity: 0;
 		transition: opacity 200ms ease-in-out 300ms;
@@ -73,5 +85,8 @@ export default {
 	.dropdown-link {
 		opacity: 1;
 	}
+}
+.router-link-exact-active {
+	background-color: var(--secondary-500);
 }
 </style>

@@ -210,7 +210,8 @@ export default {
 .order-item {
 	display: flex;
 	align-items: center;
-	padding: 2rem 0;
+	padding: 2rem 1rem;
+	background-color: var(--grey-light);
 
 	&:not(:last-child) {
 		border-bottom: 1px solid var(--grey);
@@ -225,10 +226,12 @@ export default {
 	&-name {
 		flex: 1;
 		max-width: 25rem;
+		font-weight: 600;
 	}
 	&-qty {
-		max-width: 10rem;
 		flex: 1;
+		max-width: 10rem;
+		font-weight: 600;
 	}
 }
 </style>

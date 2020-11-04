@@ -8,12 +8,14 @@
 			<SimpleFormWrapper
 				className="align-left"
 				@submit.prevent.native="
-					handleSubmit(() =>
-						UPDATE_PROFILE_INFO({
-							name: name.value,
-							email: email.value,
-							password: password.value,
-						}),
+					handleSubmit(
+						() =>
+							UPDATE_PROFILE_INFO({
+								name: name.value,
+								email: email.value,
+								password: password.value,
+							}),
+						showSuccess(),
 					)
 				"
 			>
@@ -73,9 +75,17 @@
 				v-for="order in orders"
 				:key="order._id"
 				:order="order"
+				@click.native="FETCH_SINGLE_ORDER(order._id)"
 			/>
-			<div class="no-orders" v-if="orders.length < 1">No orders</div>
+			<div class="no-orders" v-if="orders.length < 1">
+				You have no orders
+			</div>
 		</div>
+
+		<ProfileSuccessModal
+			:isInfoUpdated="isInfoUpdated"
+			@hide-success="hideSuccess"
+		/>
 	</div>
 </template>
 
@@ -83,8 +93,14 @@
 import FormInput from '@/components/form/FormInput';
 import SimpleFormWrapper from '@/components/form/SimpleFormWrapper';
 
+import ProfileSuccessModal from '@/components/layout/ProfileSuccessModal';
+
 import OrderItem from '@/components/orders/OrderItem';
-import { FETCH_MY_ORDERS } from '@/store/constants/action_types';
+import {
+	FETCH_MY_ORDERS,
+	FETCH_SINGLE_ORDER,
+	UPDATE_PROFILE_INFO,
+} from '@/store/constants/action_types';
 
 import { ValidationObserver } from 'vee-validate';
 import { mapActions, mapState } from 'vuex';
@@ -95,6 +111,7 @@ export default {
 		SimpleFormWrapper,
 		OrderItem,
 		ValidationObserver,
+		ProfileSuccessModal,
 	},
 	computed: {
 		...mapState({
@@ -103,10 +120,12 @@ export default {
 	},
 	data() {
 		return {
+			isInfoUpdated: false,
+
 			name: {
 				label: 'Full name',
 				type: 'text',
-				value: null,
+				value: this.$store.state.userModule.userData.name || null,
 				rules: {
 					required: true,
 				},
@@ -116,7 +135,7 @@ export default {
 			email: {
 				label: 'Email',
 				type: 'email',
-				value: null,
+				value: this.$store.state.userModule.userData.email || null,
 				rules: {
 					required: true,
 					email: true,
@@ -149,7 +168,22 @@ export default {
 		};
 	},
 	methods: {
-		...mapActions([FETCH_MY_ORDERS]),
+		...mapActions([
+			FETCH_MY_ORDERS,
+			FETCH_SINGLE_ORDER,
+			UPDATE_PROFILE_INFO,
+		]),
+		showSuccess() {
+			this.isInfoUpdated = true;
+			setTimeout(() => {
+				if (this.isInfoUpdated) {
+					this.isInfoUpdated = false;
+				}
+			}, 5000);
+		},
+		hideSuccess() {
+			this.isInfoUpdated = false;
+		},
 	},
 	created() {
 		this.FETCH_MY_ORDERS();
@@ -161,12 +195,17 @@ export default {
 .profile {
 	display: flex;
 	flex-direction: column;
+
 	@media only screen and(min-width:$vp-12) {
 		flex-direction: row;
 	}
 }
 .profile-form {
 	margin-bottom: 5rem;
+
+	.heading-3 {
+		margin-bottom: 3rem;
+	}
 	@media only screen and(min-width:$vp-12) {
 		margin-right: 5rem;
 		margin-bottom: 0;
@@ -174,8 +213,12 @@ export default {
 }
 .profile-orders {
 	.heading-3 {
-		margin-bottom: 2.5rem;
+		margin-bottom: 5rem;
 	}
 	flex: 1;
+}
+.no-orders {
+	font-size: 2rem;
+	color: var(--empty);
 }
 </style>

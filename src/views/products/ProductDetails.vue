@@ -114,6 +114,7 @@ export default {
 		flex-direction: row;
 	}
 	&-image {
+		align-self: center;
 		flex: 1.5;
 	}
 	&-info {

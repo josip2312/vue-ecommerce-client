@@ -7,7 +7,7 @@
 					REVIEW_PRODUCT({
 						productId,
 						rating: rating,
-						comment: comment,
+						comment: comment.value,
 					}),
 				)
 			"
@@ -95,8 +95,6 @@ p {
 	line-height: 1.1;
 }
 .product-details-review {
-	padding: 5rem 0;
-
 	.form-group {
 		position: relative;
 		max-width: 40rem;

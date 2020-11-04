@@ -12,10 +12,13 @@ export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 
 //orders
 export const CREATE_ORDER = 'CREATE_ORDER';
+export const PAY_ORDER = 'PAY_ORDER';
 export const FETCH_MY_ORDERS = 'FETCH_MY_ORDERS';
 export const FETCH_ALL_ORDERS = 'FETCH_ALL_ORDERS';
+export const FETCH_SINGLE_ORDER = 'FETCH_SINGLE_ORDER';
 export const ADD_SHIPPING_INFO = 'ADD_SHIPPING_INFO';
 export const ADD_PAYMENT_INFO = 'ADD_PAYMENT_INFO';
+export const MARK_ORDER_DELIVERED = 'MARK_ORDER_DELIVERED';
 
 //users
 export const REGISTER_USER = 'REGISTER_USER';
@@ -26,3 +29,4 @@ export const FETCH_USERS = 'FETCH_USERS';
 export const FETCH_SINGLE_USER = 'FETCH_SINGLE_USER';
 export const EDIT_USER = 'EDIT_USER';
 export const DELETE_USER = 'DELETE_USER';
+export const UPDATE_PROFILE_INFO = 'UPDATE_PROFILE_INFO';

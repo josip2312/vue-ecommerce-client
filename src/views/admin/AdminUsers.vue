@@ -3,8 +3,11 @@
 		<h3 class="heading-3">
 			Users
 		</h3>
-		<div class="users-admin spacing">
-			<AdminUser v-for="user in users" :key="user._id" :user="user" />
+
+		<AdminUser v-for="user in users" :key="user._id" :user="user" />
+
+		<div class="no-users" v-if="users.length < 1">
+			There are no users
 		</div>
 	</section>
 </template>

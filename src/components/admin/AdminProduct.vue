@@ -1,5 +1,5 @@
 <template>
-	<AdminItemContainer
+	<ItemContainer
 		@click.native="FETCH_SINGLE_PRODUCT(product._id)"
 		className="pointer"
 	>
@@ -53,11 +53,11 @@
 				<img src="@/assets/icons/trash.svg" alt="Delete" />
 			</button>
 		</template>
-	</AdminItemContainer>
+	</ItemContainer>
 </template>
 
 <script>
-import AdminItemContainer from './AdminItemContainer';
+import ItemContainer from '@/components/layout/ItemContainer';
 
 import {
 	DELETE_PRODUCT,
@@ -74,7 +74,7 @@ export default {
 		},
 	},
 	components: {
-		AdminItemContainer,
+		ItemContainer,
 	},
 	computed: {
 		productId() {

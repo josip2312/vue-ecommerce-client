@@ -1,33 +1,41 @@
 <template>
-	<AdminItemContainer className="pointer">
+	<ItemContainer className="pointer">
 		<template #item-content>
 			<div class="order-id">
-				<span>ID: </span>
-				{{ order._id }}
+				<span class="tag">ID: </span>
+				<span>
+					{{ order._id }}
+				</span>
 			</div>
 		</template>
 		<template #item-main>
 			<div class="order-date">
-				<span>Date: </span>
-				{{ formatDate(order.createdAt) }}
+				<span class="tag">Date: </span>
+				<span>
+					{{ formatDate(order.createdAt) }}
+				</span>
 			</div>
 			<div class="order-price">
-				<span>Price: </span>$ {{ order.totalPrice }}
+				<span class="tag">Price: </span>
+				<span> $ {{ order.totalPrice }} </span>
 			</div>
 		</template>
 		<template #item-sec>
 			<div class="order-paid" :class="{ warning: !order.isPaid }">
 				{{ order.isPaid ? 'Paid' : 'Not paid' }}
 			</div>
-			<div class="order-delivered" :class="{ warning: !order.isPaid }">
+			<div
+				class="order-delivered"
+				:class="{ warning: !order.isDelivered }"
+			>
 				{{ order.isDelivered ? 'Delivered ' : 'Not delivered' }}
 			</div>
 		</template>
-	</AdminItemContainer>
+	</ItemContainer>
 </template>
 
 <script>
-import AdminItemContainer from './AdminItemContainer';
+import ItemContainer from '@/components/layout/ItemContainer';
 
 export default {
 	name: 'AdminOrder',
@@ -38,7 +46,7 @@ export default {
 		},
 	},
 	components: {
-		AdminItemContainer,
+		ItemContainer,
 	},
 	methods: {
 		formatDate(date) {
@@ -49,9 +57,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-span {
-	font-weight: 600;
-	margin-right: 1rem;
+.order-paid {
+	color: var(--success);
+	font-weight: 500;
+}
+.order-delivered {
+	color: var(--success);
+
+	font-weight: 500;
 }
 .warning {
 	color: var(--warning);

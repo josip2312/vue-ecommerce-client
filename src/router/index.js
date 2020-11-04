@@ -1,11 +1,41 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Index from '../views/Index.vue';
+import store from '@/store/index';
 
 Vue.use(VueRouter);
 
 //protect routes
 
+const loggedOutGuard = (to, from, next) => {
+	if (to.matched.some((rec) => rec.meta.requiresAuth)) {
+		if (store.state.userModule.loggedIn) {
+			next();
+		} else {
+			next({ name: 'Login' });
+		}
+	}
+};
+const loggedOutAdminGuard = (to, from, next) => {
+	if (to.matched.some((rec) => rec.meta.requiresAuth)) {
+		if (
+			store.state.userModule.loggedIn &&
+			store.state.userModule.userData.isAdmin
+		) {
+			next();
+		} else {
+			next({ name: 'Login' });
+		}
+	}
+};
+
+const loggedInGuard = (to, from, next) => {
+	if (!store.state.userModule.loggedIn) {
+		next();
+	} else {
+		next({ name: 'Index' });
+	}
+};
 const routes = [
 	{
 		path: '/',
@@ -16,39 +46,30 @@ const routes = [
 	{
 		path: '/login',
 		name: 'Login',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(/* webpackChunkName: "about" */ '@/views/auth/Login.vue'),
+		beforeEnter: loggedInGuard,
 	},
 	{
 		path: '/register',
 		name: 'Register',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(/* webpackChunkName: "about" */ '@/views/auth/Register.vue'),
+		beforeEnter: loggedInGuard,
 	},
 	{
 		path: '/forgot-password',
 		name: 'ForgotPassword',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(
 				/* webpackChunkName: "about" */ '@/views/auth/ForgotPassword.vue'
 			),
+		beforeEnter: loggedInGuard,
 	},
 
 	{
 		path: '/product',
 		name: 'ProductDetails',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(
 				/* webpackChunkName: "about" */ '@/views/products/ProductDetails.vue'
@@ -58,19 +79,17 @@ const routes = [
 	{
 		path: '/profile',
 		name: 'Profile',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(/* webpackChunkName: "about" */ '@/views/Profile.vue'),
+		meta: {
+			requiresAuth: true,
+		},
+		beforeEnter: loggedOutGuard,
 	},
 
 	{
 		path: '/cart',
 		name: 'Cart',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(/* webpackChunkName: "about" */ '@/views/Cart.vue'),
 	},
@@ -78,92 +97,112 @@ const routes = [
 	{
 		path: '/shipping',
 		name: 'Shipping',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(
 				/* webpackChunkName: "about" */ '@/views/orders/Shipping.vue'
 			),
+		meta: {
+			requiresAuth: true,
+		},
+		beforeEnter: loggedOutGuard,
 	},
 	{
 		path: '/payment',
 		name: 'Payment',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(
 				/* webpackChunkName: "about" */ '@/views/orders/Payment.vue'
 			),
+		meta: {
+			requiresAuth: true,
+		},
+		beforeEnter: loggedOutGuard,
 	},
 	{
 		path: '/place-order',
 		name: 'PlaceOrder',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(
 				/* webpackChunkName: "about" */ '@/views/orders/PlaceOrder.vue'
 			),
+		meta: {
+			requiresAuth: true,
+		},
+		beforeEnter: loggedOutGuard,
+	},
+	{
+		path: '/order/:id',
+		name: 'OrderDetails',
+		component: () =>
+			import(
+				/* webpackChunkName: "about" */ '@/views/orders/OrderDetails.vue'
+			),
+		meta: {
+			requiresAuth: true,
+		},
+		beforeEnter: loggedOutGuard,
 	},
 
 	//admin routes
 	{
 		path: '/admin/products',
 		name: 'AdminProducts',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(
 				/* webpackChunkName: "about" */ '@/views/admin/AdminProducts.vue'
 			),
+		meta: {
+			requiresAuth: true,
+		},
+		beforeEnter: loggedOutAdminGuard,
 	},
 	{
 		path: '/admin/users',
 		name: 'AdminUsers',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(
 				/* webpackChunkName: "about" */ '@/views/admin/AdminUsers.vue'
 			),
+		meta: {
+			requiresAuth: true,
+		},
+		beforeEnter: loggedOutAdminGuard,
 	},
 	{
 		path: '/admin/create-product',
 		name: 'CreateProduct',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(
 				/* webpackChunkName: "about" */ '@/views/admin/CreateProduct.vue'
 			),
+		meta: {
+			requiresAuth: true,
+		},
+		beforeEnter: loggedOutAdminGuard,
 	},
 	{
 		path: '/admin/orders',
 		name: 'AdminOrders',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(
 				/* webpackChunkName: "about" */ '@/views/admin/AdminOrders.vue'
 			),
+		meta: {
+			requiresAuth: true,
+		},
+		beforeEnter: loggedOutAdminGuard,
 	},
 	{
 		path: '/admin/edit-user',
 		name: 'EditUser',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(
 				/* webpackChunkName: "about" */ '@/views/admin/EditUser.vue'
 			),
+		meta: {
+			requiresAuth: true,
+		},
+		beforeEnter: loggedOutAdminGuard,
 	},
 ];
 

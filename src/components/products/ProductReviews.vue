@@ -25,6 +25,6 @@ export default {
 
 <style lang="scss" scoped>
 .reviews {
-	padding-bottom: 5rem 0;
+	padding-bottom: 5rem;
 }
 </style>

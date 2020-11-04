@@ -1,14 +1,16 @@
 <template>
 	<header class="showcase ">
 		<div class="showcase-heading spacing">
-			<h1 class="heading-1">Vue ecommerce</h1>
+			<h1 class="heading-1">Vue Ecommerce</h1>
 			<p class="heading-desc">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit.
 				Praesentium, ut?
 			</p>
 			<div class="heading-buttons">
-				<button class="btn">Buy now</button>
-				<button class="btn btn-sec">See more</button>
+				<button class="btn" @click="sendToLogin">Buy now</button>
+				<button class="btn btn-sec" @click="sendToRegister">
+					Join us
+				</button>
 			</div>
 		</div>
 		<div class="showcase-image">
@@ -20,6 +22,14 @@
 <script>
 export default {
 	name: 'Showcase',
+	methods: {
+		sendToLogin() {
+			this.$router.push({ name: 'Login' });
+		},
+		sendToRegister() {
+			this.$router.push({ name: 'Register' });
+		},
+	},
 };
 </script>
 
@@ -88,17 +98,32 @@ export default {
 		opacity: 0;
 	}
 	.heading-1 {
-		animation: fadeLeft 750ms ease-in-out forwards 500ms;
+		animation: fadeLeft 500ms ease-in-out forwards 500ms;
 	}
 	.heading-desc {
-		animation: fadeLeft 750ms ease-in-out forwards 750ms;
+		animation: fadeLeft 500ms ease-in-out forwards 700ms;
 	}
 	.heading-buttons {
-		animation: fadeLeft 750ms ease-in-out forwards 1000ms;
+		animation: fadeLeft 500ms ease-in-out forwards 900ms;
+	}
+
+	@media only screen and(max-width:$vp-6) {
+		.heading-1 {
+			animation: fadeLeft 500ms ease-in-out forwards;
+		}
+		.heading-desc {
+			animation: fadeLeft 500ms ease-in-out forwards 200ms;
+		}
+		.heading-buttons {
+			animation: fadeLeft 500ms ease-in-out forwards 400ms;
+		}
 	}
 }
 .showcase-image {
 	opacity: 0;
 	animation: fadeLeft 750ms ease-in-out forwards;
+	@media only screen and(max-width:$vp-6) {
+		animation: fadeLeft 750ms ease-in-out forwards 500ms;
+	}
 }
 </style>

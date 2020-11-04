@@ -1,28 +1,43 @@
 <template>
-	<div class="order">
-		<div class="order-id">
-			{{ orderId }}
-		</div>
-
-		<div class="order-main">
-			<div class="order-name">
-				{{ formatDate(order.createdAt) }}
+	<ItemContainer className="pointer">
+		<template #item-content>
+			<div class="order-id">
+				<span class="tag">ID: </span>
+				<span>
+					{{ orderId }}
+				</span>
 			</div>
-			<div class="order-price">$ {{ order.totalPrice }}</div>
-		</div>
+		</template>
+		<template #item-main>
+			<div class="order-date">
+				<span class="tag">Date: </span>
+				<span>
+					{{ formatDate(order.createdAt) }}
+				</span>
+			</div>
+			<div class="order-price">
+				<span class="tag">Price: </span>
 
-		<div class="order-sec">
+				<span> $ {{ order.totalPrice }} </span>
+			</div>
+		</template>
+		<template #item-sec>
 			<div class="order-paid" :class="{ warning: !order.isPaid }">
 				{{ order.isPaid ? 'Paid' : 'Not paid' }}
 			</div>
-			<div class="order-delivered" :class="{ warning: !order.isPaid }">
+			<div
+				class="order-delivered"
+				:class="{ warning: !order.isDelivered }"
+			>
 				{{ order.isDelivered ? 'Delivered ' : 'Not delivered' }}
 			</div>
-		</div>
-	</div>
+		</template>
+	</ItemContainer>
 </template>
 
 <script>
+import ItemContainer from '@/components/layout/ItemContainer';
+
 export default {
 	name: 'OrderItem',
 	props: {
@@ -31,9 +46,12 @@ export default {
 			required: true,
 		},
 	},
+	components: {
+		ItemContainer,
+	},
 	computed: {
 		orderId() {
-			return this.order._id.slice(5) + '...';
+			return this.order._id.slice(0, 10) + '...';
 		},
 	},
 	methods: {
@@ -45,43 +63,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.order {
-	background-color: var(--grey-light);
-	padding: 2rem 1.5rem;
-	border-radius: 0.5rem;
-
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	@media only screen and(min-width:$vp-12) {
-		flex-direction: row;
-	}
-	cursor: pointer;
-	& > * {
-		display: flex;
-		width: 100%;
-		max-width: 40rem;
-		align-items: center;
-		justify-content: space-around;
-		flex: 1;
-		& > * {
-			padding: 1.5rem 2rem;
-		}
-	}
-	&-id {
-		flex: 1;
-		justify-content: center;
-		text-align: center;
-	}
-	&-price {
-		font-weight: 600;
-	}
-	&-paid {
-		color: var(--success);
-	}
-	&-delivered {
-		color: var(--success);
-	}
+.order-paid {
+	color: var(--success);
+}
+.order-delivered {
+	color: var(--success);
 }
 .warning {
 	color: var(--warning);

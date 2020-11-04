@@ -17,6 +17,8 @@ export const SET_PAYMENT_INFO = 'SET_PAYMENT_INFO';
 export const PUSH_CREATED_ORDER = 'PUSH_CREATED_ORDER';
 export const SET_MY_ORDERS = 'SET_MY_ORDERS';
 export const SET_ALL_ORDERS = 'SET_ALL_ORDERS';
+export const SET_SINGLE_ORDER = 'SET_SINGLE_ORDER';
+export const SET_ORDER_PAID = 'SET_ORDER_PAID';
 
 //users
 export const SET_USER = 'SET_USER';

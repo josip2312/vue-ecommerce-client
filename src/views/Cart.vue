@@ -8,7 +8,9 @@
 			:cartItem="cartItem"
 		/>
 
-		<div v-if="cart.length < 1" class="no-cart">No items in cart</div>
+		<div v-if="cart.length < 1" class="no-cart">
+			Your shopping cart is empty
+		</div>
 
 		<div class="subtotal spacing-sm">
 			<h4 class="heading-4">Subtotal ({{ itemsInCart }}) items</h4>
@@ -70,5 +72,9 @@ export default {
 		font-size: 2rem;
 		font-weight: 600;
 	}
+}
+.no-cart {
+	font-size: 2rem;
+	color: var(--empty);
 }
 </style>

@@ -1,13 +1,10 @@
 <template>
-	<nav
-		class="navigation"
-		:class="{ isSidebarVisible: isSidebarVisible }"
-		v-if="!isLoggedIn"
-	>
-		<router-link :to="{ name: 'Index' }" class="nav-link">
+	<nav class="navigation" v-if="!isLoggedIn">
+		<router-link :to="{ name: 'Index' }" class="nav-link home">
 			Home
 		</router-link>
 		<router-link :to="{ name: 'Cart' }" class="nav-link">
+			<img src="@/assets/icons/cart.svg" alt="Cart" />
 			Cart
 		</router-link>
 		<router-link :to="{ name: 'Login' }" class="nav-link">
@@ -17,15 +14,12 @@
 			Sign up
 		</router-link>
 	</nav>
-	<nav
-		v-else
-		class="navigation"
-		:class="{ isSidebarVisible: isSidebarVisible }"
-	>
+	<nav v-else class="navigation">
 		<router-link :to="{ name: 'Index' }" class="nav-link">
 			Home
 		</router-link>
 		<router-link :to="{ name: 'Cart' }" class="nav-link">
+			<img src="@/assets/icons/cart.svg" alt="Cart" />
 			Cart
 		</router-link>
 	</nav>
@@ -35,12 +29,7 @@
 import { mapGetters } from 'vuex';
 export default {
 	name: 'Navigation',
-	props: {
-		isSidebarVisible: {
-			type: Boolean,
-			required: true,
-		},
-	},
+
 	computed: {
 		...mapGetters(['isLoggedIn', 'getUserName', 'isAdmin']),
 	},
@@ -50,45 +39,39 @@ export default {
 <style lang="scss" scoped>
 .navigation {
 	margin-left: auto;
-
-	position: fixed;
-	right: 0;
-	top: 0;
-	bottom: 0;
+	display: flex;
+	flex-direction: row;
+	position: relative;
+	min-width: auto;
 	z-index: 10;
-	min-width: 50vw;
+
 	background-color: var(--primary);
 
-	transform: translateX(50vw);
 	transition: transform 300ms ease-in-out;
-	transform-origin: right;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-
-	@media only screen and(min-width:$vp-8) {
-		transform: translateX(0);
-		flex-direction: row;
-		position: relative;
-		min-width: auto;
-	}
 
 	.nav-link {
 		position: relative;
-		display: block;
-		margin: 2.5rem 1rem;
-		padding: 0.25rem 0;
+		display: flex;
+		align-items: center;
+		margin: 0 2.5rem;
+		padding: 0.5rem 0;
 		color: var(--font-secondary);
-		font-size: 2.5rem;
-		@media only screen and(min-width:$vp-8) {
-			margin: 0 2.5rem;
-			font-size: 1.6rem;
-			&:last-child {
-				margin-right: 0;
-			}
+		font-size: 1.6rem;
+
+		@media only screen and(max-width:$vp-8) {
+			display: none;
 		}
+		&:last-child {
+			margin-right: 0;
+		}
+		img {
+			width: 2.5rem;
+			height: 2.5rem;
+			margin-right: 0.5rem;
+		}
+	}
+	.home {
+		display: block;
 	}
 	.nav-link::after {
 		content: '';
@@ -109,9 +92,5 @@ export default {
 	.router-link-exact-active::after {
 		transform: scale(1, 1);
 	}
-}
-.isSidebarVisible {
-	opacity: 1;
-	transform: translateX(0);
 }
 </style>

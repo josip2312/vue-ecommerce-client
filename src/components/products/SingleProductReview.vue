@@ -1,10 +1,12 @@
 <template>
-	<div class="review spacing-xsm">
-		<div class="review-name">{{ review.name }}</div>
-		<StarRating :rating="review.rating" />
-		<div class="timestamp">{{ formatDate(review.createdAt) }}</div>
-		<div class="review-comment">{{ review.comment }}</div>
-	</div>
+	<transition name="fade" mode="out-in">
+		<div class="review spacing-xsm">
+			<div class="review-name">{{ review.name }}</div>
+			<StarRating :rating="review.rating" />
+			<div class="timestamp">{{ formatDate(review.createdAt) }}</div>
+			<div class="review-comment">{{ review.comment }}</div>
+		</div>
+	</transition>
 </template>
 
 <script>

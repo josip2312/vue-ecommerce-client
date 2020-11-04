@@ -12,6 +12,7 @@ import {
 	FETCH_SINGLE_USER,
 	DELETE_USER,
 	EDIT_USER,
+	UPDATE_PROFILE_INFO,
 } from '../constants/action_types';
 
 import {
@@ -80,7 +81,7 @@ export default {
 				commit(SET_USER, res.data);
 				router.push({ name: 'Index' });
 			} catch (error) {
-				console.log(error);
+				console.error(error);
 			}
 		},
 		[LOGOUT_USER]: async ({ commit }) => {
@@ -96,11 +97,11 @@ export default {
 					email,
 					password,
 				});
-				console.log(res.data);
+
 				commit(SET_USER, res.data);
 				router.push({ name: 'Index' });
 			} catch (error) {
-				console.log(error);
+				console.error(error);
 			}
 		},
 		[FETCH_USERS]: async ({ commit }) => {
@@ -144,6 +145,11 @@ export default {
 			} catch (error) {
 				console.error(error);
 			}
+		},
+		[UPDATE_PROFILE_INFO]: async ({ commit }, userData) => {
+			const { data } = await axios.put('/users/profile', userData);
+
+			commit(SET_USER, data);
 		},
 	},
 };

@@ -132,7 +132,7 @@ export default {
 
 				dispatch(FETCH_SINGLE_PRODUCT, productId);
 			} catch (error) {
-				console.log(error.response);
+				console.error(error.response);
 				commit(SET_PRODUCT_ERROR, error.response.data.message);
 			}
 		},

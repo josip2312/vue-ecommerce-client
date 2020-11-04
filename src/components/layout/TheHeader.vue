@@ -5,19 +5,7 @@
 				Logo
 			</router-link>
 
-			<button ref="button-menu" class="nav-toggle" @click="toggleSidebar">
-				<span
-					class="hamburger"
-					:class="{ active: isSidebarVisible }"
-				></span>
-			</button>
-			<Navigation
-				:isSidebarVisible="isSidebarVisible"
-				v-clickOutside="{
-					exclude: ['button-menu'],
-					handler: 'hideSidebar',
-				}"
-			/>
+			<Navigation />
 
 			<div class="user-dropdown-toggle" v-if="isLoggedIn">
 				<button
@@ -29,6 +17,7 @@
 					<img src="@/assets/icons/chevronDown.svg" alt="" />
 				</button>
 				<UserDropdownMenu
+					@hide-user-dropdown="hideUserDropdown"
 					v-clickOutside="{
 						exclude: ['button-user'],
 						handler: 'hideUserDropdown',
@@ -48,6 +37,7 @@
 				</button>
 				<AdminDropdownMenu
 					:isAdminDropdownVisible="isAdminDropdownVisible"
+					@hide-admin-dropdown="hideAdminDropdown"
 					v-clickOutside="{
 						exclude: ['button-admin'],
 						handler: 'hideAdminDropdown',
@@ -55,6 +45,7 @@
 				/>
 			</div>
 		</div>
+		<TheMobileNav />
 	</div>
 </template>
 
@@ -63,6 +54,7 @@ import { mapGetters } from 'vuex';
 import Navigation from './Navigation';
 import UserDropdownMenu from './UserDropdownMenu';
 import AdminDropdownMenu from './AdminDropdownMenu';
+import TheMobileNav from '@/components/layout/TheMobileNav';
 
 import clickOutside from '@/directives/click-outside';
 
@@ -72,10 +64,10 @@ export default {
 		Navigation,
 		UserDropdownMenu,
 		AdminDropdownMenu,
+		TheMobileNav,
 	},
 	data() {
 		return {
-			isSidebarVisible: false,
 			isUserDropdownVisible: false,
 			isAdminDropdownVisible: false,
 		};
@@ -85,15 +77,10 @@ export default {
 	},
 
 	methods: {
-		toggleSidebar() {
-			this.isSidebarVisible = !this.isSidebarVisible;
-		},
 		toggleUserDropdown() {
 			this.isUserDropdownVisible = !this.isUserDropdownVisible;
 		},
-		hideSidebar() {
-			this.isSidebarVisible = false;
-		},
+
 		hideUserDropdown() {
 			this.isUserDropdownVisible = false;
 		},
@@ -134,59 +121,6 @@ export default {
 	.logo {
 		padding: 1.75rem 0;
 		color: var(--font-secondary);
-	}
-	.nav-toggle {
-		margin-left: auto;
-
-		display: inline-block;
-		@media only screen and(min-width:$vp-8) {
-			display: none;
-		}
-		border: 0;
-		border-radius: 0.25em 0 0 0.25em;
-		background-color: var(--primary);
-		padding: 1em 0.5em;
-		cursor: pointer;
-		z-index: 15;
-		.hamburger {
-			position: relative;
-			display: block;
-		}
-		//hamburger animations
-		.hamburger,
-		.hamburger::before,
-		.hamburger::after {
-			height: 3px;
-			width: 1.5em;
-			border-radius: 1rem;
-			background-color: var(--font-secondary);
-			transition: transform 250ms ease-in-out, opacity 250ms linear;
-		}
-
-		.hamburger::before,
-		.hamburger::after {
-			content: '';
-			position: absolute;
-			left: 0;
-		}
-
-		.hamburger::before {
-			bottom: 0.8rem;
-		}
-		.hamburger::after {
-			top: 0.8rem;
-		}
-
-		.hamburger.active {
-			transform: rotate(135deg);
-		}
-		.hamburger.active::before {
-			bottom: 0rem;
-			opacity: 0;
-		}
-		.hamburger.active::after {
-			transform: rotate(90deg) translate(-0.8rem);
-		}
 	}
 
 	.user-dropdown-toggle {

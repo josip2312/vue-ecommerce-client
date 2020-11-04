@@ -32,6 +32,9 @@ export default {
 	padding: 2rem 1.5rem;
 	border-radius: 0.5rem;
 	color: var(--primary);
+	&:not(:last-child) {
+		margin-bottom: 2.5rem;
+	}
 	@media only screen and(min-width:$vp-14) {
 		padding: 2rem 0rem;
 
@@ -80,7 +83,7 @@ export default {
 		}
 	}
 	&-content {
-		flex: 1;
+		flex: 0.75;
 		@media only screen and(min-width:$vp-14) {
 			display: flex;
 			justify-content: center;

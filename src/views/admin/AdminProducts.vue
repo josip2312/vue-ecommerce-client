@@ -17,7 +17,9 @@
 			:product="product"
 		>
 		</AdminProduct>
-		<div class="no-products" v-if="products.length < 1">No products</div>
+		<div class="no-products" v-if="products.length < 1">
+			There are no products
+		</div>
 	</section>
 </template>
 

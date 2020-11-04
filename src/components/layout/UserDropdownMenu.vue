@@ -3,7 +3,11 @@
 		class="dropdown"
 		:class="{ isUserDropdownVisible: isUserDropdownVisible }"
 	>
-		<router-link class="dropdown-link" :to="{ name: 'Profile' }">
+		<router-link
+			class="dropdown-link"
+			:to="{ name: 'Profile' }"
+			@click.native="$emit('hide-user-dropdown')"
+		>
 			Profile
 		</router-link>
 		<a href="" class="dropdown-link logout" @click.prevent="LOGOUT_USER">
@@ -33,8 +37,8 @@ export default {
 <style lang="scss" scoped>
 .dropdown {
 	position: absolute;
-	left: -1rem;
-	padding: 1rem 2.5rem;
+	left: -2rem;
+	padding: 1rem 0;
 	top: 100%;
 
 	display: flex;
@@ -50,8 +54,8 @@ export default {
 	.dropdown-link {
 		color: var(--font-secondary);
 		font-size: 1.8rem;
-		padding: 0.5rem 0;
-
+		padding: 1rem 3rem;
+		width: 100%;
 		opacity: 0;
 		transition: opacity 200ms ease-in-out 300ms;
 
@@ -67,5 +71,8 @@ export default {
 	.dropdown-link {
 		opacity: 1;
 	}
+}
+.router-link-exact-active {
+	background-color: var(--secondary-500);
 }
 </style>

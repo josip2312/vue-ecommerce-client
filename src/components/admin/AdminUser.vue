@@ -1,5 +1,5 @@
 <template>
-	<AdminItemContainer>
+	<ItemContainer>
 		<template #item-content>
 			<div class="user-id">
 				<span class="tag">ID: </span>
@@ -46,11 +46,11 @@
 				<img src="@/assets/icons/trash.svg" alt="Delete" />
 			</button>
 		</template>
-	</AdminItemContainer>
+	</ItemContainer>
 </template>
 
 <script>
-import AdminItemContainer from './AdminItemContainer';
+import ItemContainer from '@/components/layout/ItemContainer';
 
 import { mapActions } from 'vuex';
 import { FETCH_SINGLE_USER, DELETE_USER } from '@/store/constants/action_types';
@@ -63,7 +63,7 @@ export default {
 		},
 	},
 	components: {
-		AdminItemContainer,
+		ItemContainer,
 	},
 	computed: {
 		userId() {

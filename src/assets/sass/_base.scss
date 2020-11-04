@@ -3,9 +3,7 @@ html {
 	box-sizing: border-box;
 	font-size: 62.5%;
 	scroll-behavior: smooth;
-	/* @media only screen and(min-width:$vp-14) {
-		font-size: 70%;
-	} */
+
 	@media only screen and(min-width:$vp-4k) {
 		font-size: 85%;
 	}
@@ -33,7 +31,7 @@ body {
 	line-height: 1;
 }
 .heading-2 {
-	font-size: 3.2rem;
+	font-size: 3.5rem;
 	line-height: 1;
 	font-weight: 600;
 }
