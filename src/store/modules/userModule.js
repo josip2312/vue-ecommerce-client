@@ -147,9 +147,12 @@ export default {
 			}
 		},
 		[UPDATE_PROFILE_INFO]: async ({ commit }, userData) => {
-			const { data } = await axios.put('/users/profile', userData);
-
-			commit(SET_USER, data);
+			try {
+				const { data } = await axios.put('/users/profile', userData);
+				commit(SET_USER, data);
+			} catch (error) {
+				console.error(error);
+			}
 		},
 	},
 };

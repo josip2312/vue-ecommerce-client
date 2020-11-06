@@ -75,7 +75,10 @@ import ProductReviews from '@/components/products/ProductReviews';
 import ProductReviewForm from '@/components/products/ProductReviewForm';
 import StarRating from '@/components/products/StarRating';
 
-import { ADD_TO_CART } from '@/store/constants/action_types';
+import {
+	ADD_TO_CART,
+	FETCH_SINGLE_PRODUCT,
+} from '@/store/constants/action_types';
 
 export default {
 	name: 'ProductDetails',
@@ -98,10 +101,13 @@ export default {
 		...mapGetters(['isLoggedIn']),
 	},
 	methods: {
-		...mapActions([ADD_TO_CART]),
+		...mapActions([ADD_TO_CART, FETCH_SINGLE_PRODUCT]),
 		sendToLogin() {
 			this.$router.push({ name: 'Login' });
 		},
+	},
+	mounted() {
+		this.FETCH_SINGLE_PRODUCT(this.$route.params.id);
 	},
 };
 </script>

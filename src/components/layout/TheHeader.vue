@@ -2,7 +2,7 @@
 	<div class="header">
 		<div class="wrapper">
 			<router-link :to="{ name: 'Index' }" class="logo">
-				Logo
+				Vue-Ecommerce
 			</router-link>
 
 			<Navigation />
@@ -119,7 +119,11 @@ export default {
 	align-items: center;
 
 	.logo {
-		padding: 1.75rem 0;
+		font-family: 'Vegan Style';
+		font-size: 2rem;
+		line-height: 1.2;
+		margin: 1.75rem 0;
+
 		color: var(--font-secondary);
 	}
 
@@ -153,7 +157,7 @@ export default {
 	.admin-dropdown-toggle {
 		position: relative;
 		z-index: 15;
-		margin-left: 3.5rem;
+		margin-left: 1.5rem;
 
 		padding: 0.5rem 0;
 

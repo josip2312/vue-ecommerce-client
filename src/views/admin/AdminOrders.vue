@@ -7,7 +7,7 @@
 			v-for="order in orders"
 			:key="order._id"
 			:order="order"
-			@click.native="FETCH_SINGLE_ORDER(order._id)"
+			@click.native="sendToOrderDetails(order._id)"
 		/>
 		<div class="no-orders" v-if="orders.length < 1">
 			There are no orders
@@ -18,10 +18,7 @@
 <script>
 import AdminOrder from '@/components/admin/AdminOrder';
 
-import {
-	FETCH_ALL_ORDERS,
-	FETCH_SINGLE_ORDER,
-} from '@/store/constants/action_types';
+import { FETCH_ALL_ORDERS } from '@/store/constants/action_types';
 
 import { mapState, mapActions } from 'vuex';
 
@@ -36,7 +33,15 @@ export default {
 		}),
 	},
 	methods: {
-		...mapActions([FETCH_ALL_ORDERS, FETCH_SINGLE_ORDER]),
+		...mapActions([FETCH_ALL_ORDERS]),
+		sendToOrderDetails(id) {
+			this.$router.push({
+				name: 'OrderDetails',
+				params: {
+					id,
+				},
+			});
+		},
 	},
 	created() {
 		this.FETCH_ALL_ORDERS();

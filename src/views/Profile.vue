@@ -75,7 +75,7 @@
 				v-for="order in orders"
 				:key="order._id"
 				:order="order"
-				@click.native="FETCH_SINGLE_ORDER(order._id)"
+				@click.native="sendToOrderDetails(order._id)"
 			/>
 			<div class="no-orders" v-if="orders.length < 1">
 				You have no orders
@@ -98,7 +98,6 @@ import ProfileSuccessModal from '@/components/layout/ProfileSuccessModal';
 import OrderItem from '@/components/orders/OrderItem';
 import {
 	FETCH_MY_ORDERS,
-	FETCH_SINGLE_ORDER,
 	UPDATE_PROFILE_INFO,
 } from '@/store/constants/action_types';
 
@@ -168,11 +167,15 @@ export default {
 		};
 	},
 	methods: {
-		...mapActions([
-			FETCH_MY_ORDERS,
-			FETCH_SINGLE_ORDER,
-			UPDATE_PROFILE_INFO,
-		]),
+		...mapActions([FETCH_MY_ORDERS, UPDATE_PROFILE_INFO]),
+		sendToOrderDetails(id) {
+			this.$router.push({
+				name: 'OrderDetails',
+				params: {
+					id,
+				},
+			});
+		},
 		showSuccess() {
 			this.isInfoUpdated = true;
 			setTimeout(() => {

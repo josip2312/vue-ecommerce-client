@@ -81,8 +81,9 @@
 						:rules="category.rules"
 					/>
 				</div>
-				<div class="form-group">
+				<div class="form-group ">
 					<FormInput
+						reference="fileInput"
 						:label="image.label"
 						:type="image.type"
 						:name="image.name"
@@ -90,7 +91,20 @@
 						v-model="image.value"
 						:rules="image.rules"
 						@change.native="setSelectedFile"
+						ref="file"
 					/>
+					<div
+						class="image"
+						@click.prevent="$refs.file.$refs.fileInput.click()"
+					>
+						<span>
+							Choose file
+						</span>
+						<button class="image-upload">
+							Browse
+						</button>
+					</div>
+
 					<img v-if="url" :src="url" alt="" />
 				</div>
 				<div class="form-group">
@@ -153,7 +167,6 @@ export default {
 				value: this.$route.params.price || null,
 				rules: {
 					required: true,
-					double: true,
 				},
 				name: 'price',
 				id: 'price',
@@ -233,4 +246,19 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.image {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	justify-content: space-between;
+	background-color: var(--grey);
+	padding: 1rem 1.2rem;
+}
+.image-upload {
+	border: none;
+	padding: 0.75rem 2rem;
+	border-radius: 3px;
+	font-size: 1.8rem;
+}
+</style>

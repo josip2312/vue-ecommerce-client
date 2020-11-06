@@ -15,9 +15,9 @@
 			</router-link>
 		</div>
 		<div class="mobile-nav-wrapper" v-else>
-			<router-link :to="{ name: 'Index' }">
-				<img src="@/assets/icons/home.svg" alt="Home" />
-				<span>Home</span>
+			<router-link :to="{ name: 'Products' }">
+				<img src="@/assets/icons/products.svg" alt="Products" />
+				<span>Products</span>
 			</router-link>
 			<router-link :to="{ name: 'Cart' }">
 				<img src="@/assets/icons/cart.svg" alt="Rides" />
@@ -96,6 +96,7 @@ export default {
 		}
 
 		.router-link-exact-active {
+			background-color: var(--secondary-dark);
 		}
 	}
 }

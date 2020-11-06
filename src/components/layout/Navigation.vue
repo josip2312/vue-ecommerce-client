@@ -3,6 +3,9 @@
 		<router-link :to="{ name: 'Index' }" class="nav-link home">
 			Home
 		</router-link>
+		<router-link :to="{ name: 'Products' }" class="nav-link products">
+			Products
+		</router-link>
 		<router-link :to="{ name: 'Cart' }" class="nav-link">
 			<img src="@/assets/icons/cart.svg" alt="Cart" />
 			Cart
@@ -53,7 +56,7 @@ export default {
 		position: relative;
 		display: flex;
 		align-items: center;
-		margin: 0 2.5rem;
+		margin: 0 2rem;
 		padding: 0.5rem 0;
 		color: var(--font-secondary);
 		font-size: 1.6rem;
@@ -72,6 +75,12 @@ export default {
 	}
 	.home {
 		display: block;
+	}
+	.products {
+		display: block;
+		@media only screen and(max-width:$vp-8) {
+			margin-right: 0;
+		}
 	}
 	.nav-link::after {
 		content: '';

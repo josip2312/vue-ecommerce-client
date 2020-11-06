@@ -1,10 +1,10 @@
 <template>
-	<ItemContainer>
+	<ItemContainer className="admin-smaller">
 		<template #item-content>
 			<div class="user-id">
 				<span class="tag">ID: </span>
 				<span>
-					{{ user._id }}
+					{{ userId }}
 				</span>
 			</div>
 		</template>
@@ -67,7 +67,7 @@ export default {
 	},
 	computed: {
 		userId() {
-			return this.user._id.slice(5) + '...';
+			return this.user._id.slice(0, 10) + '...';
 		},
 	},
 	methods: {

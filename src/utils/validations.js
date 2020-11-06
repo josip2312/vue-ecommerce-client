@@ -6,7 +6,6 @@ import {
 	email,
 	alpha,
 	confirmed,
-	double,
 	numeric,
 	min,
 } from 'vee-validate/dist/rules';
@@ -62,10 +61,10 @@ extend('confirmed', {
 	...confirmed,
 	message: 'Passwords do not match',
 });
-extend('double', {
+/* extend('double', {
 	...double,
 	message: 'This field has to be a number',
-});
+}); */
 extend('numeric', {
 	...numeric,
 	message: 'This field has to be a number',

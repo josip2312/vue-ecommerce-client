@@ -5,8 +5,6 @@ import store from '@/store/index';
 
 Vue.use(VueRouter);
 
-//protect routes
-
 const loggedOutGuard = (to, from, next) => {
 	if (to.matched.some((rec) => rec.meta.requiresAuth)) {
 		if (store.state.userModule.loggedIn) {
@@ -42,6 +40,22 @@ const routes = [
 		name: 'Index',
 		component: Index,
 	},
+	{
+		path: '/products',
+		name: 'Products',
+		component: () =>
+			import(
+				/* webpackChunkName: "about" */ '@/views/products/Products.vue'
+			),
+		scrollBehaviour: {},
+	},
+	{
+		path: '/products/:pageNumber',
+		component: () =>
+			import(
+				/* webpackChunkName: "about" */ '@/views/products/Products.vue'
+			),
+	},
 
 	{
 		path: '/login',
@@ -68,8 +82,9 @@ const routes = [
 	},
 
 	{
-		path: '/product',
+		path: '/product/:id',
 		name: 'ProductDetails',
+
 		component: () =>
 			import(
 				/* webpackChunkName: "about" */ '@/views/products/ProductDetails.vue'

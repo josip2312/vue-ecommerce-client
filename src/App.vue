@@ -13,9 +13,6 @@
 <script>
 import TheHeader from '@/components/layout/TheHeader';
 import TheFooter from '@/components/layout/TheFooter';
-import { mapActions } from 'vuex';
-
-import { FETCH_PRODUCTS } from '@/store/constants/action_types';
 
 export default {
 	name: 'App',
@@ -23,18 +20,15 @@ export default {
 		TheHeader,
 		TheFooter,
 	},
-	methods: {
-		...mapActions([FETCH_PRODUCTS]),
-	},
-
-	created() {
-		this.FETCH_PRODUCTS();
-	},
 };
 </script>
 <style lang="scss">
 @import '@/assets/sass/app.scss';
 .wrap {
 	min-height: 100vh;
+}
+@font-face {
+	font-family: 'Vegan Style';
+	src: local('vegan'), url('./assets/fonts/vegan.ttf') format('truetype');
 }
 </style>

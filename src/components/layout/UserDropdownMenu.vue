@@ -10,6 +10,13 @@
 		>
 			Profile
 		</router-link>
+		<router-link
+			class="dropdown-link"
+			:to="{ name: 'Products' }"
+			@click.native="$emit('hide-user-dropdown')"
+		>
+			Products
+		</router-link>
 		<a href="" class="dropdown-link logout" @click.prevent="LOGOUT_USER">
 			Logout
 		</a>

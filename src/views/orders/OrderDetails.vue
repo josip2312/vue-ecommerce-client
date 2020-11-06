@@ -107,7 +107,9 @@ import OrderModal from '@/components/orders/OrderModal';
 import {
 	PAY_ORDER,
 	MARK_ORDER_DELIVERED,
+	FETCH_SINGLE_ORDER,
 } from '@/store/constants/action_types';
+
 export default {
 	name: 'OrderDetails',
 	data() {
@@ -142,7 +144,7 @@ export default {
 		},
 	},
 	methods: {
-		...mapActions([PAY_ORDER, MARK_ORDER_DELIVERED]),
+		...mapActions([PAY_ORDER, MARK_ORDER_DELIVERED, FETCH_SINGLE_ORDER]),
 		formatDate(date) {
 			return new Date(date).toLocaleDateString('hr');
 		},
@@ -213,52 +215,9 @@ export default {
 			this.isOrderPlaced = false;
 		},
 	},
-	/* watch: {
-		sdkReady: function() {
-			let vm = this;
-			window.paypal
-				.Buttons({
-					env: 'sandbox',
 
-					locale: 'en-BA',
-					style: {
-						color: 'gold',
-					},
-					createOrder: function(data, actions) {
-						return actions.order.create({
-							purchase_units: [
-								{
-									amount: {
-										value: vm.order.totalPrice,
-									},
-								},
-							],
-						});
-					},
-					onApprove: function(data, actions) {
-						return actions.order.capture().then(function(details) {
-							vm.PAY_ORDER({
-								orderId: vm.order._id,
-								paymentResult: {
-									id: details.id,
-									status: details.status,
-									email_address: details.payer.email_address,
-									update_time: details.update_time,
-								},
-							});
-							vm.showOrderModal();
-
-							alert(
-								'Transaction completed by ' +
-									details.payer.name.given_name,
-							);
-						});
-					},
-				})
-				.render('#paypal-button');
-		},
-	}, */
 	mounted() {
+		this.FETCH_SINGLE_ORDER(this.$route.params.id);
 		if (!this.isAdmin) {
 			this.addPayPalScript();
 		}

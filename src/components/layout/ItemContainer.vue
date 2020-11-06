@@ -36,7 +36,7 @@ export default {
 		margin-bottom: 2.5rem;
 	}
 	@media only screen and(min-width:$vp-14) {
-		padding: 2rem 0rem;
+		padding: 2rem 1rem;
 
 		display: flex;
 		align-items: center;
@@ -83,7 +83,7 @@ export default {
 		}
 	}
 	&-content {
-		flex: 0.75;
+		flex: 0.5;
 		@media only screen and(min-width:$vp-14) {
 			display: flex;
 			justify-content: center;
@@ -119,5 +119,10 @@ export default {
 }
 .pointer {
 	cursor: pointer;
+}
+.admin-smaller {
+	.item-sec {
+		flex: 0.5;
+	}
 }
 </style>

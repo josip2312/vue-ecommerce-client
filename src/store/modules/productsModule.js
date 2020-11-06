@@ -13,6 +13,7 @@ import {
 	DELETE_PRODUCT,
 	ADD_TO_CART,
 	REMOVE_FROM_CART,
+	FETCH_TOP_PRODUCTS,
 } from '../constants/action_types';
 
 import {
@@ -26,6 +27,7 @@ import {
 	SET_ADD_CART,
 	CLEAR_CART,
 	SET_REMOVE_CART,
+	SET_TOP_PRODUCTS,
 } from '../constants/mutation_types';
 
 Vue.use(Vuex);
@@ -35,6 +37,9 @@ export default {
 		cart: [],
 
 		products: [],
+		page: 1,
+		pages: 1,
+		topProducts: [],
 		product: {},
 		error: {
 			errorMessage: '',
@@ -67,7 +72,12 @@ export default {
 			state.cart = [];
 		},
 		[SET_PRODUCTS]: (state, data) => {
-			state.products = data;
+			state.products = data.products;
+			state.page = data.page;
+			state.pages = data.pages;
+		},
+		[SET_TOP_PRODUCTS]: (state, data) => {
+			state.topProducts = data;
 		},
 		[SET_SINGLE_PRODUCT]: (state, product) => {
 			state.product = product;
@@ -100,11 +110,21 @@ export default {
 		},
 	},
 	actions: {
-		[FETCH_PRODUCTS]: async ({ commit }) => {
+		[FETCH_PRODUCTS]: async ({ commit }, pageNumber = '') => {
 			try {
-				const res = await axios.get('products');
+				const { data } = await axios.get(
+					`products?pageNumber=${pageNumber}`,
+				);
 
-				commit(SET_PRODUCTS, res.data);
+				commit(SET_PRODUCTS, data);
+			} catch (error) {
+				console.error(error);
+			}
+		},
+		[FETCH_TOP_PRODUCTS]: async ({ commit }) => {
+			try {
+				const { data } = await axios.get('products/all/top');
+				commit(SET_TOP_PRODUCTS, data);
 			} catch (error) {
 				console.error(error);
 			}
@@ -113,9 +133,6 @@ export default {
 			try {
 				const res = await axios.get(`products/${id}`);
 				commit(SET_SINGLE_PRODUCT, res.data);
-				if (router.history.current.name !== 'ProductDetails') {
-					router.push({ name: 'ProductDetails' });
-				}
 			} catch (error) {
 				console.error(error);
 			}

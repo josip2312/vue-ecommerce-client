@@ -9,6 +9,7 @@
 			autocomplete="on"
 			:value="value"
 			:step="step"
+			:ref="reference"
 			@input="$emit('input', $event.target.value)"
 		/>
 		<p>{{ v.errors[0] }}</p>
@@ -56,6 +57,9 @@ export default {
 			type: String,
 			default: '1',
 		},
+		reference: {
+			type: String,
+		},
 	},
 };
 </script>
@@ -65,7 +69,9 @@ input {
 	@include input;
 	margin-bottom: 0.2rem;
 }
-
+#image {
+	display: none;
+}
 label {
 	text-transform: uppercase;
 	letter-spacing: 1px;

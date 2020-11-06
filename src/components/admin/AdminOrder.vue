@@ -4,7 +4,7 @@
 			<div class="order-id">
 				<span class="tag">ID: </span>
 				<span>
-					{{ order._id }}
+					{{ orderId }}
 				</span>
 			</div>
 		</template>
@@ -43,6 +43,11 @@ export default {
 		order: {
 			type: Object,
 			required: true,
+		},
+	},
+	computed: {
+		orderId() {
+			return this.order._id.slice(0, 10) + '...';
 		},
 	},
 	components: {

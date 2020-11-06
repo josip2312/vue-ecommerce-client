@@ -44,7 +44,7 @@ export default {
 	padding: 2.5rem;
 
 	background: var(--font-secondary);
-	box-shadow: 0 2px 8px 0 hsla(0, 0%, 0%, 0.2);
+	box-shadow: 0 3px 8px 0 hsla(0, 0%, 0%, 0.25);
 	border-radius: 3px;
 
 	.heading-2 {

@@ -1,13 +1,13 @@
 <template>
 	<ItemContainer
-		@click.native="FETCH_SINGLE_PRODUCT(product._id)"
+		@click.native="sendToProductDetails(product._id)"
 		className="pointer"
 	>
 		<template #item-content>
 			<div class="product-id">
 				<span class="tag">ID: </span>
 				<span>
-					{{ product._id }}
+					{{ productId }}
 				</span>
 			</div>
 		</template>
@@ -59,11 +59,7 @@
 <script>
 import ItemContainer from '@/components/layout/ItemContainer';
 
-import {
-	DELETE_PRODUCT,
-	EDIT_PRODUCT,
-	FETCH_SINGLE_PRODUCT,
-} from '@/store/constants/action_types';
+import { DELETE_PRODUCT, EDIT_PRODUCT } from '@/store/constants/action_types';
 import { mapActions } from 'vuex';
 export default {
 	name: 'AdminProduct',
@@ -78,11 +74,19 @@ export default {
 	},
 	computed: {
 		productId() {
-			return this.product._id.slice(5) + '...';
+			return this.product._id.slice(0, 10) + '...';
 		},
 	},
 	methods: {
-		...mapActions([DELETE_PRODUCT, EDIT_PRODUCT, FETCH_SINGLE_PRODUCT]),
+		...mapActions([DELETE_PRODUCT, EDIT_PRODUCT]),
+		sendToProductDetails(id) {
+			this.$router.push({
+				name: 'ProductDetails',
+				params: {
+					id,
+				},
+			});
+		},
 		sendToCreateProduct(product) {
 			const {
 				_id,

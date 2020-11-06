@@ -1,16 +1,22 @@
 <template>
-	<header class="showcase ">
+	<header class="showcase container">
 		<div class="showcase-heading spacing">
 			<h1 class="heading-1">Vue Ecommerce</h1>
 			<p class="heading-desc">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit.
 				Praesentium, ut?
 			</p>
-			<div class="heading-buttons">
+			<div class="heading-buttons" v-if="!isLoggedIn">
 				<button class="btn" @click="sendToLogin">Buy now</button>
 				<button class="btn btn-sec" @click="sendToRegister">
 					Join us
 				</button>
+			</div>
+			<div class="heading-buttons" v-else>
+				<a href="#products" class="btn">Buy now</a>
+				<router-link :to="{ name: 'Profile' }" class="btn btn-sec">
+					Join us
+				</router-link>
 			</div>
 		</div>
 		<div class="showcase-image">
@@ -20,6 +26,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
 	name: 'Showcase',
 	methods: {
@@ -30,14 +37,14 @@ export default {
 			this.$router.push({ name: 'Register' });
 		},
 	},
+	computed: {
+		...mapGetters(['isLoggedIn']),
+	},
 };
 </script>
 
 <style scoped lang="scss">
 .showcase {
-	width: 80%;
-	max-width: 120rem;
-	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

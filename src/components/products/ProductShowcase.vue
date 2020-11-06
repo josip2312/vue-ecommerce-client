@@ -1,6 +1,6 @@
 <template>
 	<div class="product spacing-sm">
-		<div class="product-image" @click="FETCH_SINGLE_PRODUCT(product._id)">
+		<div class="product-image" @click="sendToProductDetails(product._id)">
 			<img :src="product.image" alt="A product image" />
 		</div>
 		<div class="product-info spacing">
@@ -18,9 +18,6 @@
 </template>
 
 <script>
-import { FETCH_SINGLE_PRODUCT } from '@/store/constants/action_types';
-import { mapActions } from 'vuex';
-
 import StarRating from '@/components/products/StarRating';
 
 export default {
@@ -28,6 +25,7 @@ export default {
 	components: {
 		StarRating,
 	},
+
 	props: {
 		product: {
 			type: Object,
@@ -35,18 +33,32 @@ export default {
 		},
 	},
 	methods: {
-		...mapActions([FETCH_SINGLE_PRODUCT]),
+		sendToProductDetails(id) {
+			this.$router.push({
+				name: 'ProductDetails',
+				params: {
+					id,
+				},
+			});
+		},
 	},
 };
 </script>
 
 <style scoped lang="scss">
+.appear-enter-active,
+.appear-leave-active {
+	transition: opacity 750ms ease-in-out;
+}
+.appear-enter,
+.appear-leave-to {
+	opacity: 0;
+}
 .product {
 	.product-image {
 		cursor: pointer;
 		img {
 			width: 100%;
-
 			height: 100%;
 			object-fit: cover;
 		}
