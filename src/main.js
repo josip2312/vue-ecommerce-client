@@ -6,7 +6,7 @@ import '@/axios/axios';
 import '@/utils/validations.js';
 import store from './store';
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
 
 new Vue({
 	router,
