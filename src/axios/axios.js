@@ -32,18 +32,20 @@ axios.interceptors.response.use(
 	function(error) {
 		store.state.loading = false;
 
-		if (
-			error.response.data.message === 'jwt expired' ||
-			error.response.data.message === 'Not authenticated'
-		) {
-			store.dispatch(LOGOUT_USER);
-		}
-		console.log(error.response);
-		if (error.response.data.message) {
-			store.commit('ERROR', error.response.data.message);
-			setTimeout(() => {
-				store.commit('CLEAR_ERROR');
-			}, 3000);
+		if (error.response) {
+			if (
+				error.response.data.message === 'jwt expired' ||
+				error.response.data.message === 'Not authenticated'
+			) {
+				store.dispatch(LOGOUT_USER);
+			}
+
+			if (error.response.data.message) {
+				store.commit('ERROR', error.response.data.message);
+				setTimeout(() => {
+					store.commit('CLEAR_ERROR');
+				}, 3000);
+			}
 		}
 
 		return Promise.reject(error);

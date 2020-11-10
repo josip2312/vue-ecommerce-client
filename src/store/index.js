@@ -18,7 +18,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
 		loading: false,
-		success: true,
+		success: false,
 		successMessage: '',
 		error: false,
 		errorMessage: '',
