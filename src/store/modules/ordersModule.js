@@ -69,11 +69,17 @@ export default {
 			router.push({ name: 'PlaceOrder' });
 		},
 
-		[CREATE_ORDER]: async ({ commit, dispatch }, order) => {
+		[CREATE_ORDER]: async ({ commit }, order) => {
 			try {
 				const { data } = await axios.post('/orders', order);
 				commit(PUSH_CREATED_ORDER, data);
-				dispatch(FETCH_SINGLE_ORDER, data._id);
+				const id = data._id;
+				router.push({
+					name: 'OrderDetails',
+					params: {
+						id,
+					},
+				});
 			} catch (error) {
 				console.error(error);
 			}

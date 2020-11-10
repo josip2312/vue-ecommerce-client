@@ -29,12 +29,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
-	name: 'Navigation',
+	name: "Navigation",
 
 	computed: {
-		...mapGetters(['isLoggedIn', 'getUserName', 'isAdmin']),
+		...mapGetters(["isLoggedIn", "getUserName", "isAdmin"]),
 	},
 };
 </script>
@@ -59,9 +59,8 @@ export default {
 		margin: 0 2rem;
 		padding: 0.5rem 0;
 		color: var(--font-secondary);
-		font-size: 1.6rem;
 
-		@media only screen and(max-width:$vp-8) {
+		@media only screen and(max-width:$v-8) {
 			display: none;
 		}
 		&:last-child {
@@ -78,12 +77,12 @@ export default {
 	}
 	.products {
 		display: block;
-		@media only screen and(max-width:$vp-8) {
+		@media only screen and(max-width:$v-8) {
 			margin-right: 0;
 		}
 	}
 	.nav-link::after {
-		content: '';
+		content: "";
 		position: absolute;
 		left: 0;
 		bottom: 0;

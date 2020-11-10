@@ -31,19 +31,19 @@
 	</div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-	name: 'TheMobileNav',
+	name: "TheMobileNav",
 
 	computed: {
-		...mapGetters(['isLoggedIn']),
+		...mapGetters(["isLoggedIn"]),
 	},
 };
 </script>
 <style lang="scss" scoped>
 .mobile-nav {
-	@media only screen and(min-width:$vp-8) {
+	@media only screen and(min-width:$v-8) {
 		display: none;
 	}
 	display: block;

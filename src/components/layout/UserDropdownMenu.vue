@@ -24,10 +24,10 @@
 </template>
 
 <script>
-import { LOGOUT_USER } from '@/store/constants/action_types';
-import { mapActions } from 'vuex';
+import { LOGOUT_USER } from "@/store/constants/action_types";
+import { mapActions } from "vuex";
 export default {
-	name: 'UserDropdownMenu',
+	name: "UserDropdownMenu",
 	props: {
 		isUserDropdownVisible: {
 			type: Boolean,
@@ -60,7 +60,7 @@ export default {
 
 	.dropdown-link {
 		color: var(--font-secondary);
-		font-size: 1.8rem;
+		font-size: 1.7rem;
 		padding: 1rem 3rem;
 		width: 100%;
 		opacity: 0;

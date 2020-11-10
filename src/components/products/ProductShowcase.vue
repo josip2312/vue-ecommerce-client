@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import StarRating from '@/components/products/StarRating';
+import StarRating from "@/components/products/StarRating";
 
 export default {
-	name: 'Product',
+	name: "Product",
 	components: {
 		StarRating,
 	},
@@ -35,7 +35,7 @@ export default {
 	methods: {
 		sendToProductDetails(id) {
 			this.$router.push({
-				name: 'ProductDetails',
+				name: "ProductDetails",
 				params: {
 					id,
 				},
@@ -56,6 +56,7 @@ export default {
 }
 .product {
 	.product-image {
+		width: 100%;
 		cursor: pointer;
 		img {
 			width: 100%;

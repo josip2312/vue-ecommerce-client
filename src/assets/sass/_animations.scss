@@ -35,3 +35,14 @@
 		opacity: 1;
 	}
 }
+@keyframes up {
+	0% {
+		opacity: 0;
+		transform: translateY(3.5rem);
+	}
+	100% {
+		transform: translateY(0);
+
+		opacity: 1;
+	}
+}

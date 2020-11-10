@@ -44,27 +44,19 @@
 			<div class="order-summary">
 				<h3 class="heading-3">Order summary</h3>
 				<div class="items">
-					<span>
-						Items
-					</span>
+					<span> Items </span>
 					<span> $ {{ subtotal }} </span>
 				</div>
 				<div class="shipping">
-					<span>
-						Shipping
-					</span>
+					<span> Shipping </span>
 					<span> $ {{ shippingPrice }} </span>
 				</div>
 				<div class="tax">
-					<span>
-						Tax
-					</span>
+					<span> Tax </span>
 					<span> $ {{ taxPrice }} </span>
 				</div>
 				<div class="total">
-					<span>
-						Total
-					</span>
+					<span> Total </span>
 					<span> $ {{ totalPrice }} </span>
 				</div>
 				<button
@@ -89,14 +81,14 @@
 </template>
 
 <script>
-import CheckoutSteps from '@/components/orders/CheckoutSteps';
+import CheckoutSteps from "@/components/orders/CheckoutSteps";
 
-import { CREATE_ORDER } from '@/store/constants/action_types';
+import { CREATE_ORDER } from "@/store/constants/action_types";
 
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState } from "vuex";
 
 export default {
-	name: 'PlaceOrder',
+	name: "PlaceOrder",
 	components: {
 		CheckoutSteps,
 	},
@@ -143,7 +135,7 @@ export default {
 	display: flex;
 
 	flex-direction: column;
-	@media only screen and(min-width:$vp-8) {
+	@media only screen and(min-width:$v-8) {
 		align-items: flex-start;
 		flex-direction: row;
 	}
@@ -161,7 +153,7 @@ export default {
 	flex-direction: column;
 	background-color: var(--grey-light);
 	padding: 2.5rem;
-	@media only screen and(min-width:$vp-8) {
+	@media only screen and(min-width:$v-8) {
 		margin-top: 0;
 	}
 	.heading-3 {

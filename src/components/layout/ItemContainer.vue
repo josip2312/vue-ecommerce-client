@@ -17,7 +17,7 @@
 
 <script>
 export default {
-	name: 'AdminItemContainer',
+	name: "AdminItemContainer",
 	props: {
 		className: {
 			type: String,
@@ -35,7 +35,7 @@ export default {
 	&:not(:last-child) {
 		margin-bottom: 2.5rem;
 	}
-	@media only screen and(min-width:$vp-14) {
+	@media only screen and(min-width:$v-14) {
 		padding: 2rem 1rem;
 
 		display: flex;
@@ -48,7 +48,7 @@ export default {
 		.tag {
 			color: var(--font-primary);
 			font-weight: 600;
-			@media only screen and(min-width:$vp-14) {
+			@media only screen and(min-width:$v-14) {
 				margin-right: 0.5rem;
 				display: flex;
 				align-items: center;
@@ -62,7 +62,7 @@ export default {
 
 			padding: 1rem 0;
 
-			@media only screen and(min-width:$vp-14) {
+			@media only screen and(min-width:$v-14) {
 				justify-content: flex-start;
 			}
 		}
@@ -71,7 +71,7 @@ export default {
 	&-sec {
 		flex: 1;
 
-		@media only screen and(min-width:$vp-14) {
+		@media only screen and(min-width:$v-14) {
 			display: flex;
 
 			& > * {
@@ -84,7 +84,7 @@ export default {
 	}
 	&-content {
 		flex: 0.5;
-		@media only screen and(min-width:$vp-14) {
+		@media only screen and(min-width:$v-14) {
 			display: flex;
 			justify-content: center;
 		}
@@ -105,7 +105,7 @@ export default {
 			border: none;
 		}
 		img:first-child {
-			@media only screen and(min-width:$vp-14) {
+			@media only screen and(min-width:$v-14) {
 			}
 		}
 		img {

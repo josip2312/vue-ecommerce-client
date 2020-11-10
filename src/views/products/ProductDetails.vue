@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<div class="product-details">
+		<div class="product-details" v-if="!isLoading">
 			<div class="product-details-image">
 				<img :src="product.image" :alt="product.name" />
 			</div>
@@ -48,6 +48,9 @@
 				</div>
 			</div>
 		</div>
+
+		<div v-if="isLoading" class="loading">Loading....</div>
+
 		<div class="product-details-review">
 			<h3 class="heading-3">User reviews</h3>
 
@@ -69,19 +72,19 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from "vuex";
 
-import ProductReviews from '@/components/products/ProductReviews';
-import ProductReviewForm from '@/components/products/ProductReviewForm';
-import StarRating from '@/components/products/StarRating';
+import ProductReviews from "@/components/products/ProductReviews";
+import ProductReviewForm from "@/components/products/ProductReviewForm";
+import StarRating from "@/components/products/StarRating";
 
 import {
 	ADD_TO_CART,
 	FETCH_SINGLE_PRODUCT,
-} from '@/store/constants/action_types';
+} from "@/store/constants/action_types";
 
 export default {
-	name: 'ProductDetails',
+	name: "ProductDetails",
 	components: {
 		ProductReviews,
 		ProductReviewForm,
@@ -98,12 +101,12 @@ export default {
 			product: (state) => state.productsModule.product,
 			error: (state) => state.productsModule.error,
 		}),
-		...mapGetters(['isLoggedIn']),
+		...mapGetters(["isLoggedIn", "isLoading"]),
 	},
 	methods: {
 		...mapActions([ADD_TO_CART, FETCH_SINGLE_PRODUCT]),
 		sendToLogin() {
-			this.$router.push({ name: 'Login' });
+			this.$router.push({ name: "Login" });
 		},
 	},
 	mounted() {
@@ -113,10 +116,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.loading {
+	font-size: 2rem;
+	color: var(--empty);
+}
 .product-details {
 	display: flex;
 	flex-direction: column;
-	@media only screen and(min-width:$vp-10) {
+	@media only screen and(min-width:$v-10) {
 		flex-direction: row;
 	}
 	&-image {
@@ -131,7 +138,7 @@ export default {
 		align-items: flex-start;
 
 		padding: 5rem 0;
-		@media only screen and(min-width:$vp-10) {
+		@media only screen and(min-width:$v-10) {
 			padding: 1rem 0 1rem 5rem;
 		}
 	}

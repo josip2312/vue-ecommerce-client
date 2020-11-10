@@ -1,23 +1,19 @@
 <template>
 	<section class="users container">
-		<h3 class="heading-3">
-			Users
-		</h3>
+		<h3 class="heading-3">Users</h3>
 
 		<AdminUser v-for="user in users" :key="user._id" :user="user" />
 
-		<div class="no-users" v-if="users.length < 1">
-			There are no users
-		</div>
+		<div class="no-users" v-if="users.length < 1">There are no users</div>
 	</section>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
-import AdminUser from '@/components/admin/AdminUser';
-import { FETCH_USERS, DELETE_USER } from '@/store/constants/action_types';
+import { mapActions, mapState } from "vuex";
+import AdminUser from "@/components/admin/AdminUser";
+import { FETCH_USERS, DELETE_USER } from "@/store/constants/action_types";
 export default {
-	name: 'AdminUsers',
+	name: "AdminUsers",
 	components: {
 		AdminUser,
 	},
@@ -39,5 +35,9 @@ export default {
 <style lang="scss" scoped>
 .heading-3 {
 	margin-bottom: 5rem;
+}
+.no-users {
+	font-size: 2rem;
+	color: var(--empty);
 }
 </style>

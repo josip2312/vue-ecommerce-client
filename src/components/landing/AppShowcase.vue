@@ -26,19 +26,19 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
-	name: 'Showcase',
+	name: "Showcase",
 	methods: {
 		sendToLogin() {
-			this.$router.push({ name: 'Login' });
+			this.$router.push({ name: "Login" });
 		},
 		sendToRegister() {
-			this.$router.push({ name: 'Register' });
+			this.$router.push({ name: "Register" });
 		},
 	},
 	computed: {
-		...mapGetters(['isLoggedIn']),
+		...mapGetters(["isLoggedIn"]),
 	},
 };
 </script>
@@ -48,7 +48,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	@media only screen and(min-width:$vp-10) {
+	@media only screen and(min-width:$v-12) {
 		flex-direction: row;
 		justify-content: center;
 		min-height: 90vh;
@@ -65,11 +65,15 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	@media only screen and(min-width:$vp-10) {
+	@media only screen and(min-width:$v-12) {
 		padding-top: 0;
 		align-items: flex-start;
 		text-align: left;
 		margin-right: 3.5rem;
+	}
+
+	.heading-desc {
+		color: var(--font-paragraph);
 	}
 
 	.heading-buttons {
@@ -83,12 +87,15 @@ export default {
 .showcase-image {
 	position: relative;
 	z-index: -1;
+
 	img {
 		border-radius: 3px;
+		@media only screen and(min-width:$v-12) {
+		}
 	}
 }
 .showcase-image::after {
-	content: '';
+	content: "";
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -114,7 +121,7 @@ export default {
 		animation: fadeLeft 500ms ease-in-out forwards 900ms;
 	}
 
-	@media only screen and(max-width:$vp-6) {
+	@media only screen and(max-width:$v-6) {
 		.heading-1 {
 			animation: fadeLeft 500ms ease-in-out forwards;
 		}
@@ -129,7 +136,7 @@ export default {
 .showcase-image {
 	opacity: 0;
 	animation: fadeLeft 750ms ease-in-out forwards;
-	@media only screen and(max-width:$vp-6) {
+	@media only screen and(max-width:$v-6) {
 		animation: fadeLeft 750ms ease-in-out forwards 500ms;
 	}
 }

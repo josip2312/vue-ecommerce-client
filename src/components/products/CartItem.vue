@@ -40,10 +40,10 @@
 </template>
 
 <script>
-import { REMOVE_FROM_CART, ADD_TO_CART } from '@/store/constants/action_types';
-import { mapActions } from 'vuex';
+import { REMOVE_FROM_CART, ADD_TO_CART } from "@/store/constants/action_types";
+import { mapActions } from "vuex";
 export default {
-	name: 'CartItem',
+	name: "CartItem",
 
 	props: {
 		cartItem: {
@@ -66,7 +66,7 @@ export default {
 	&:not(:last-child) {
 		margin-bottom: 2.5rem;
 	}
-	@media only screen and(min-width:$vp-9) {
+	@media only screen and(min-width:$v-9) {
 		flex-direction: row;
 	}
 	&-info {
@@ -74,7 +74,7 @@ export default {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		@media only screen and(min-width:$vp-9) {
+		@media only screen and(min-width:$v-9) {
 			flex-direction: row;
 		}
 
@@ -91,7 +91,7 @@ export default {
 		align-self: center;
 		max-width: 35rem;
 		margin-bottom: 2.5rem;
-		@media only screen and(min-width:$vp-9) {
+		@media only screen and(min-width:$v-9) {
 			max-width: 25rem;
 
 			margin-bottom: 0;

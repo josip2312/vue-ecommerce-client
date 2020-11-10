@@ -11,7 +11,9 @@
 				v-model="searchTerm"
 			/>
 		</div>
-
+		<div v-if="filteredProducts.length < 1" class="no-products">
+			Sorry, there are no products available
+		</div>
 		<transition-group name="fade" mode="out-in" tag="div" class="products">
 			<ProductShowcase
 				v-for="product in filteredProducts"
@@ -19,27 +21,28 @@
 				:product="product"
 			/>
 		</transition-group>
+
 		<Pagination />
 	</section>
 </template>
 
 <script>
-import ProductShowcase from '@/components/products/ProductShowcase';
-import Pagination from '@/components/layout/Pagination';
+import ProductShowcase from "@/components/products/ProductShowcase";
+import Pagination from "@/components/layout/Pagination";
 
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState } from "vuex";
 
-import { FETCH_PRODUCTS } from '@/store/constants/action_types';
+import { FETCH_PRODUCTS } from "@/store/constants/action_types";
 
 export default {
-	name: 'Products',
+	name: "Products",
 	components: {
 		ProductShowcase,
 		Pagination,
 	},
 	data() {
 		return {
-			searchTerm: '',
+			searchTerm: "",
 		};
 	},
 	computed: {
@@ -63,7 +66,7 @@ export default {
 		...mapActions([FETCH_PRODUCTS]),
 	},
 	watch: {
-		$route: function() {
+		$route: function () {
 			this.FETCH_PRODUCTS(this.$route.params.pageNumber);
 		},
 	},
@@ -87,6 +90,11 @@ export default {
 	min-height: 90vh;
 	gap: 5rem;
 	grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+	animation: up 1000ms ease forwards;
+}
+.no-products {
+	font-size: 2rem;
+	color: var(--empty);
 }
 .heading-3 {
 	margin-bottom: 5rem;

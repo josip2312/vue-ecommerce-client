@@ -15,22 +15,24 @@
 	--accent: #102036;
 
 	--warning: #ff0033;
-	--warning-light: #f3c0c4;
+	--warning-light: #ebafb4;
 	--success: #117243;
+	--success-light: #3ad36d;
 
 	--empty: #606063;
 
 	--font-primary: #1e1f2c;
-	--font-paragraph: #41445d;
+	--font-paragraph: #434766;
 	--font-secondary: #fcfcfc;
 }
 
-$vp-4k: 125em; // 2000px
-$vp-17: 105rem; ////1680px
-$vp-14: 85.375em; //1366px
-$vp-12: 75em; //1200px
-$vp-10: 62.5em; //1000px
-$vp-9: 56.25rem; //900px
-$vp-8: 48rem; // 768px
-$vp-6: 35.5em; //568px
-$vp-3: 20em; //320px
+$v-4k: 140.625em; // 2250px
+$v-20: 125em; // 2000px
+$v-17: 105em; ////1680px
+$v-14: 85.375em; //1366px
+$v-12: 75em; //1200px
+$v-10: 62.5em; //1000px
+$v-9: 56.25rem; //900px
+$v-8: 48rem; // 768px
+$v-6: 35.5em; //568px
+$v-3: 20em; //320px

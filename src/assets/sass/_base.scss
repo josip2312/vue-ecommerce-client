@@ -5,16 +5,22 @@ html {
 	font-size: 62.5%;
 	scroll-behavior: smooth;
 
-	@media only screen and(min-width:$vp-4k) {
+	@media only screen and(min-width:$v-17) {
+		font-size: 65%;
+	}
+	@media only screen and(min-width:$v-20) {
+		font-size: 70%;
+	}
+	@media only screen and(min-width:$v-4k) {
 		font-size: 85%;
 	}
-	@media only screen and(max-width:$vp-9) {
+	@media only screen and(max-width:$v-9) {
 		font-size: 57.5%;
 	}
-	@media only screen and(max-width:$vp-8) {
+	@media only screen and(max-width:$v-8) {
 		font-size: 55%;
 	}
-	@media only screen and(max-width:$vp-6) {
+	@media only screen and(max-width:$v-6) {
 		font-size: 50%;
 	}
 }
@@ -27,7 +33,7 @@ body {
 	overflow-x: hidden;
 }
 .heading-1 {
-	font-size: 4.8rem;
+	font-size: 6rem;
 	font-weight: 600;
 	line-height: 1;
 }

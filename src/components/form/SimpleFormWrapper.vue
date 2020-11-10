@@ -6,7 +6,7 @@
 
 <script>
 export default {
-	name: 'FormWrapper',
+	name: "FormWrapper",
 	props: {
 		className: {
 			type: String,
@@ -24,7 +24,7 @@ export default {
 	max-width: 60rem;
 
 	margin: 0 auto;
-	@media only screen and(min-width:$vp-12) {
+	@media only screen and(min-width:$v-12) {
 		min-width: auto;
 	}
 	.form-group {
@@ -44,7 +44,7 @@ export default {
 	}
 }
 .align-left {
-	@media only screen and(min-width:$vp-12) {
+	@media only screen and(min-width:$v-12) {
 		margin: 0;
 		max-width: 50rem;
 	}

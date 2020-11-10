@@ -1,14 +1,15 @@
 <template>
 	<section id="top-products" class="container">
-		<h3 class="heading-3">
-			Top products
-		</h3>
+		<h3 class="heading-3">Top products</h3>
 		<div class="top-products">
 			<ProductShowcase
 				v-for="product in topProducts"
 				:key="product._id"
 				:product="product"
 			/>
+		</div>
+		<div v-if="topProducts.length < 1" class="no-products">
+			Sorry, there are no products available
 		</div>
 		<router-link :to="{ name: 'Products' }" class="btn"
 			>See all products</router-link
@@ -17,13 +18,13 @@
 </template>
 
 <script>
-import ProductShowcase from '@/components/products/ProductShowcase';
+import ProductShowcase from "@/components/products/ProductShowcase";
 
-import { FETCH_TOP_PRODUCTS } from '@/store/constants/action_types';
-import { mapActions, mapState } from 'vuex';
+import { FETCH_TOP_PRODUCTS } from "@/store/constants/action_types";
+import { mapActions, mapState } from "vuex";
 
 export default {
-	name: 'AppTopProducts',
+	name: "AppTopProducts",
 	components: {
 		ProductShowcase,
 	},
@@ -50,6 +51,10 @@ export default {
 	display: grid;
 	gap: 5rem;
 	grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+}
+.no-products {
+	font-size: 2rem;
+	color: var(--empty);
 }
 .btn {
 	display: flex;

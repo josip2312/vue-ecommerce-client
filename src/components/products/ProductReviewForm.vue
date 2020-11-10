@@ -8,7 +8,7 @@
 						productId,
 						rating: rating,
 						comment: comment.value,
-					}),
+					})
 				)
 			"
 		>
@@ -35,20 +35,20 @@
 				/>
 			</div>
 			<div class="form-group">
-				<button class="btn" type="submit">Send</button>
+				<button class="btn" type="submit">Review</button>
 			</div>
 		</form>
 	</ValidationObserver>
 </template>
 
 <script>
-import { ValidationObserver, ValidationProvider } from 'vee-validate';
-import { mapActions, mapGetters } from 'vuex';
-import { REVIEW_PRODUCT } from '@/store/constants/action_types';
-import FormTextarea from '@/components/form/FormTextarea';
+import { ValidationObserver, ValidationProvider } from "vee-validate";
+import { mapActions, mapGetters } from "vuex";
+import { REVIEW_PRODUCT } from "@/store/constants/action_types";
+import FormTextarea from "@/components/form/FormTextarea";
 
 export default {
-	name: 'ProductReviewForm',
+	name: "ProductReviewForm",
 	props: {
 		productId: {
 			type: String,
@@ -62,11 +62,11 @@ export default {
 	},
 	data() {
 		return {
-			rating: '',
+			rating: "",
 			comment: {
-				label: 'Leave a comment',
-				name: 'comment',
-				id: 'comment',
+				label: "Leave a comment",
+				name: "comment",
+				id: "comment",
 				value: null,
 				rules: {
 					required: true,
@@ -75,7 +75,7 @@ export default {
 		};
 	},
 	computed: {
-		...mapGetters(['isLoggedIn']),
+		...mapGetters(["isLoggedIn"]),
 	},
 	methods: {
 		...mapActions([REVIEW_PRODUCT]),

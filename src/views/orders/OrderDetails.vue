@@ -58,27 +58,19 @@
 			<div class="order-summary">
 				<h3 class="heading-3">Order summary</h3>
 				<div class="items">
-					<span>
-						Items
-					</span>
+					<span> Items </span>
 					<span> $ {{ subtotal }} </span>
 				</div>
 				<div class="shipping">
-					<span>
-						Shipping
-					</span>
+					<span> Shipping </span>
 					<span> $ {{ order.shippingPrice }} </span>
 				</div>
 				<div class="tax">
-					<span>
-						Tax
-					</span>
+					<span> Tax </span>
 					<span> $ {{ order.taxPrice }} </span>
 				</div>
 				<div class="total">
-					<span>
-						Total
-					</span>
+					<span> Total </span>
 					<span> $ {{ order.totalPrice }} </span>
 				</div>
 
@@ -100,18 +92,18 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { mapActions, mapGetters, mapState } from 'vuex';
+import axios from "axios";
+import { mapActions, mapGetters, mapState } from "vuex";
 
-import OrderModal from '@/components/orders/OrderModal';
+import OrderModal from "@/components/orders/OrderModal";
 import {
 	PAY_ORDER,
 	MARK_ORDER_DELIVERED,
 	FETCH_SINGLE_ORDER,
-} from '@/store/constants/action_types';
+} from "@/store/constants/action_types";
 
 export default {
-	name: 'OrderDetails',
+	name: "OrderDetails",
 	data() {
 		return {
 			isOrderPlaced: false,
@@ -124,16 +116,16 @@ export default {
 		...mapState({
 			order: (state) => state.ordersModule.orderDetails,
 		}),
-		...mapGetters(['isAdmin']),
+		...mapGetters(["isAdmin"]),
 		isPaid() {
 			return this.order.isPaid
 				? `Paid on ${this.formatDate(this.order.paidAt)}`
-				: 'Not paid';
+				: "Not paid";
 		},
 		isDelivered() {
 			return this.order.isDelivered
 				? `Delivered on ${this.formatDate(this.order.deliveredAt)}`
-				: 'Not delivered';
+				: "Not delivered";
 		},
 		subtotal() {
 			let sum = this.order.orderItems.reduce((acc, item) => {
@@ -146,15 +138,15 @@ export default {
 	methods: {
 		...mapActions([PAY_ORDER, MARK_ORDER_DELIVERED, FETCH_SINGLE_ORDER]),
 		formatDate(date) {
-			return new Date(date).toLocaleDateString('hr');
+			return new Date(date).toLocaleDateString("hr");
 		},
 		async addPayPalScript() {
 			try {
 				const { data: clientId } = await axios.get(
-					'/api/config/paypal',
+					"/api/config/paypal"
 				);
-				const script = document.createElement('script');
-				script.type = 'text/javascript';
+				const script = document.createElement("script");
+				script.type = "text/javascript";
 				script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=EUR`;
 				script.async = true;
 				script.onload = () => {
@@ -169,13 +161,13 @@ export default {
 			let vm = this;
 			window.paypal
 				.Buttons({
-					env: 'sandbox',
+					env: "sandbox",
 
-					locale: 'en-BA',
+					locale: "en-BA",
 					style: {
-						color: 'gold',
+						color: "gold",
 					},
-					createOrder: function(data, actions) {
+					createOrder: function (data, actions) {
 						return actions.order.create({
 							purchase_units: [
 								{
@@ -186,8 +178,8 @@ export default {
 							],
 						});
 					},
-					onApprove: function(data, actions) {
-						return actions.order.capture().then(function(details) {
+					onApprove: function (data, actions) {
+						return actions.order.capture().then(function (details) {
 							vm.PAY_ORDER({
 								orderId: vm.order._id,
 								paymentResult: {
@@ -201,7 +193,7 @@ export default {
 						});
 					},
 				})
-				.render('#paypal-button');
+				.render("#paypal-button");
 		},
 		showOrderModal() {
 			this.isOrderPlaced = true;
@@ -233,7 +225,7 @@ export default {
 	display: flex;
 
 	flex-direction: column;
-	@media only screen and(min-width:$vp-10) {
+	@media only screen and(min-width:$v-10) {
 		align-items: flex-start;
 		flex-direction: row;
 	}
@@ -252,7 +244,7 @@ export default {
 	flex-direction: column;
 	background-color: var(--grey-light);
 	padding: 2.5rem;
-	@media only screen and(min-width:$vp-10) {
+	@media only screen and(min-width:$v-10) {
 		margin-top: 0;
 	}
 	.heading-3 {

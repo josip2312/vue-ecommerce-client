@@ -28,3 +28,9 @@ export const SET_LOGGED_OUT = 'SET_LOGGED_OUT';
 export const SET_USER_DELETED = 'SET_USER_DELETED';
 export const SET_EDITING_USER = 'SET_EDITING_USER';
 export const SET_USER_DETAILS = 'SET_USER_DETAILS';
+
+//global
+export const SUCCESS = 'SUCCESS';
+export const CLEAR_SUCCESS = 'CLEAR_SUCCESS';
+export const ERROR = 'ERROR';
+export const CLEAR_ERROR = 'CLEAR_ERROR';

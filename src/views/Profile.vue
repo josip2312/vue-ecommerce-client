@@ -15,7 +15,7 @@
 								email: email.value,
 								password: password.value,
 							}),
-						showSuccess(),
+						showSuccess()
 					)
 				"
 			>
@@ -62,9 +62,7 @@
 							v-model="confirmPassword.value"
 						/>
 					</div>
-					<button class="form-group btn">
-						Update
-					</button>
+					<button class="form-group btn">Update</button>
 				</template>
 			</SimpleFormWrapper>
 		</ValidationObserver>
@@ -90,21 +88,21 @@
 </template>
 
 <script>
-import FormInput from '@/components/form/FormInput';
-import SimpleFormWrapper from '@/components/form/SimpleFormWrapper';
+import FormInput from "@/components/form/FormInput";
+import SimpleFormWrapper from "@/components/form/SimpleFormWrapper";
 
-import ProfileSuccessModal from '@/components/layout/ProfileSuccessModal';
+import ProfileSuccessModal from "@/components/layout/ProfileSuccessModal";
 
-import OrderItem from '@/components/orders/OrderItem';
+import OrderItem from "@/components/orders/OrderItem";
 import {
 	FETCH_MY_ORDERS,
 	UPDATE_PROFILE_INFO,
-} from '@/store/constants/action_types';
+} from "@/store/constants/action_types";
 
-import { ValidationObserver } from 'vee-validate';
-import { mapActions, mapState } from 'vuex';
+import { ValidationObserver } from "vee-validate";
+import { mapActions, mapState } from "vuex";
 export default {
-	name: 'Profile',
+	name: "Profile",
 	components: {
 		FormInput,
 		SimpleFormWrapper,
@@ -122,47 +120,47 @@ export default {
 			isInfoUpdated: false,
 
 			name: {
-				label: 'Full name',
-				type: 'text',
+				label: "Full name",
+				type: "text",
 				value: this.$store.state.userModule.userData.name || null,
 				rules: {
 					required: true,
 				},
-				name: 'name',
-				id: 'name',
+				name: "name",
+				id: "name",
 			},
 			email: {
-				label: 'Email',
-				type: 'email',
+				label: "Email",
+				type: "email",
 				value: this.$store.state.userModule.userData.email || null,
 				rules: {
 					required: true,
 					email: true,
 				},
-				name: 'email',
-				id: 'email',
+				name: "email",
+				id: "email",
 			},
 			password: {
-				label: 'Password',
-				type: 'password',
+				label: "Password",
+				type: "password",
 				value: null,
 				rules: {
 					required: true,
 					password: this.value,
 				},
-				name: 'password',
-				id: 'password',
-				vid: 'confirmation',
+				name: "password",
+				id: "password",
+				vid: "confirmation",
 			},
 			confirmPassword: {
-				label: 'Confirm password',
-				type: 'password',
+				label: "Confirm password",
+				type: "password",
 				value: null,
 				rules: {
 					confirmed: { confirmation: true },
 				},
-				name: 'confirmPassword',
-				id: 'confirmPassword',
+				name: "confirmPassword",
+				id: "confirmPassword",
 			},
 		};
 	},
@@ -170,7 +168,7 @@ export default {
 		...mapActions([FETCH_MY_ORDERS, UPDATE_PROFILE_INFO]),
 		sendToOrderDetails(id) {
 			this.$router.push({
-				name: 'OrderDetails',
+				name: "OrderDetails",
 				params: {
 					id,
 				},
@@ -199,7 +197,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 
-	@media only screen and(min-width:$vp-12) {
+	@media only screen and(min-width:$v-12) {
 		flex-direction: row;
 	}
 }
@@ -209,7 +207,7 @@ export default {
 	.heading-3 {
 		margin-bottom: 3rem;
 	}
-	@media only screen and(min-width:$vp-12) {
+	@media only screen and(min-width:$v-12) {
 		margin-right: 5rem;
 		margin-bottom: 0;
 	}

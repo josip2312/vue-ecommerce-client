@@ -1,5 +1,5 @@
 <template>
-	<ItemContainer className="admin-smaller">
+	<ItemContainer className="admin-smaller" v-if="user._id !== getUserId">
 		<template #item-content>
 			<div class="user-id">
 				<span class="tag">ID: </span>
@@ -26,7 +26,7 @@
 			<div class="user-admin">
 				<span class="tag">Role: </span>
 				<span>
-					{{ user.isAdmin ? 'Admin' : 'User' }}
+					{{ user.isAdmin ? "Admin" : "User" }}
 				</span>
 			</div>
 		</template>
@@ -50,12 +50,12 @@
 </template>
 
 <script>
-import ItemContainer from '@/components/layout/ItemContainer';
+import ItemContainer from "@/components/layout/ItemContainer";
 
-import { mapActions } from 'vuex';
-import { FETCH_SINGLE_USER, DELETE_USER } from '@/store/constants/action_types';
+import { mapActions, mapGetters } from "vuex";
+import { FETCH_SINGLE_USER, DELETE_USER } from "@/store/constants/action_types";
 export default {
-	name: 'AdminUser',
+	name: "AdminUser",
 	props: {
 		user: {
 			type: Object,
@@ -66,8 +66,9 @@ export default {
 		ItemContainer,
 	},
 	computed: {
+		...mapGetters(["getUserId"]),
 		userId() {
-			return this.user._id.slice(0, 10) + '...';
+			return this.user._id.slice(0, 10) + "...";
 		},
 	},
 	methods: {

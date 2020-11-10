@@ -29,10 +29,10 @@
 </template>
 
 <script>
-import { LOGOUT_USER } from '@/store/constants/action_types';
-import { mapActions, mapGetters } from 'vuex';
+import { LOGOUT_USER } from "@/store/constants/action_types";
+import { mapActions, mapGetters } from "vuex";
 export default {
-	name: 'UserDropdownMenu',
+	name: "UserDropdownMenu",
 	props: {
 		isAdminDropdownVisible: {
 			type: Boolean,
@@ -40,7 +40,7 @@ export default {
 		},
 	},
 	computed: {
-		...mapGetters(['isAdmin']),
+		...mapGetters(["isAdmin"]),
 	},
 	methods: {
 		...mapActions([LOGOUT_USER]),
@@ -67,7 +67,7 @@ export default {
 
 	.dropdown-link {
 		color: var(--font-secondary);
-		font-size: 1.8rem;
+		font-size: 1.7rem;
 		padding: 1rem 3rem;
 
 		opacity: 0;

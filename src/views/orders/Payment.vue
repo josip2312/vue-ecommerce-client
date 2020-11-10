@@ -26,19 +26,19 @@
 </template>
 
 <script>
-import CheckoutSteps from '@/components/orders/CheckoutSteps';
+import CheckoutSteps from "@/components/orders/CheckoutSteps";
 
-import { ADD_PAYMENT_INFO } from '@/store/constants/action_types';
+import { ADD_PAYMENT_INFO } from "@/store/constants/action_types";
 
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 export default {
-	name: 'Payment',
+	name: "Payment",
 	components: {
 		CheckoutSteps,
 	},
 	data() {
 		return {
-			paymentMethod: '',
+			paymentMethod: "PayPal",
 		};
 	},
 	methods: {

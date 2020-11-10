@@ -1,9 +1,7 @@
 <template>
 	<section class="products container spacing">
 		<div class="products-top">
-			<h3 class="heading-3">
-				Products
-			</h3>
+			<h3 class="heading-3">Products</h3>
 			<router-link
 				:to="{ name: 'CreateProduct' }"
 				class="btn create-product"
@@ -24,11 +22,11 @@
 </template>
 
 <script>
-import AdminProduct from '@/components/admin/AdminProduct';
+import AdminProduct from "@/components/admin/AdminProduct";
 
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 export default {
-	name: 'AdminProducts',
+	name: "AdminProducts",
 	components: {
 		AdminProduct,
 	},
@@ -50,10 +48,14 @@ export default {
 		margin-bottom: 5rem;
 		.heading-3 {
 			margin-right: 1.5rem;
-			@media only screen and(max-width:$vp-6) {
+			@media only screen and(max-width:$v-6) {
 				padding-bottom: 2.5rem;
 			}
 		}
 	}
+}
+.no-products {
+	font-size: 2rem;
+	color: var(--empty);
 }
 </style>
