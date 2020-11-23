@@ -25,7 +25,7 @@
 								category: category.value,
 								image: imagePath,
 								description: description.value,
-						  }),
+						  })
 				)
 			"
 		>
@@ -81,7 +81,7 @@
 						:rules="category.rules"
 					/>
 				</div>
-				<div class="form-group ">
+				<div class="form-group">
 					<FormInput
 						reference="fileInput"
 						:label="image.label"
@@ -97,12 +97,8 @@
 						class="image"
 						@click.prevent="$refs.file.$refs.fileInput.click()"
 					>
-						<span>
-							Choose file
-						</span>
-						<button class="image-upload">
-							Browse
-						</button>
+						<span> Choose file </span>
+						<button class="image-upload">Browse</button>
 					</div>
 
 					<img v-if="url" :src="url" alt="" />
@@ -125,18 +121,18 @@
 </template>
 
 <script>
-import FormWrapper from '@/components/form/FormWrapper';
-import FormInput from '@/components/form/FormInput';
-import FormTextarea from '@/components/form/FormTextarea';
-import { ValidationObserver } from 'vee-validate';
+import FormWrapper from "@/components/form/FormWrapper";
+import FormInput from "@/components/form/FormInput";
+import FormTextarea from "@/components/form/FormTextarea";
+import { ValidationObserver } from "vee-validate";
 
-import { EDIT_PRODUCT, CREATE_PRODUCT } from '@/store/constants/action_types';
+import { EDIT_PRODUCT, CREATE_PRODUCT } from "@/store/constants/action_types";
 
-import axios from 'axios';
-import { mapActions } from 'vuex';
+import axios from "axios";
+import { mapActions } from "vuex";
 
 export default {
-	name: 'CreateProduct',
+	name: "CreateProduct",
 	components: {
 		FormWrapper,
 		FormInput,
@@ -148,72 +144,72 @@ export default {
 		return {
 			selectedFile: null,
 			url: this.$route.params.image,
-			imagePath: this.$route.params.image || '',
+			imagePath: this.$route.params.image || "",
 			editing: this.$route.params.editing,
 
 			name: {
-				label: 'Name',
-				type: 'text',
+				label: "Name",
+				type: "text",
 				value: this.$route.params.name || null,
 				rules: {
 					required: true,
 				},
-				name: 'name',
-				id: 'name',
+				name: "name",
+				id: "name",
 			},
 			price: {
-				label: 'Price',
-				type: 'number',
+				label: "Price",
+				type: "number",
 				value: this.$route.params.price || null,
 				rules: {
 					required: true,
 				},
-				name: 'price',
-				id: 'price',
+				name: "price",
+				id: "price",
 			},
 			brand: {
-				label: 'Brand',
-				type: 'text',
+				label: "Brand",
+				type: "text",
 				value: this.$route.params.brand || null,
 				rules: {
 					required: true,
 				},
-				name: 'brand',
-				id: 'brand',
+				name: "brand",
+				id: "brand",
 			},
 			inStock: {
-				label: 'In stock',
-				type: 'number',
+				label: "In stock",
+				type: "number",
 				value: this.$route.params.inStock || null,
 				rules: {
 					required: true,
 					numeric: true,
 				},
-				name: 'inStock',
-				id: 'inStock',
+				name: "inStock",
+				id: "inStock",
 			},
 			category: {
-				label: 'Category',
-				type: 'text',
+				label: "Category",
+				type: "text",
 				value: this.$route.params.category || null,
 				rules: {
 					required: true,
 				},
-				name: 'category',
-				id: 'category',
+				name: "category",
+				id: "category",
 			},
 			image: {
-				label: 'Image',
-				type: 'file',
+				label: "Image",
+				type: "file",
 				value: null,
-				name: 'image',
-				id: 'image',
+				name: "image",
+				id: "image",
 			},
 			description: {
-				label: 'Description',
+				label: "Description",
 				value: this.$route.params.description || null,
-				name: 'description',
-				id: 'description',
+				name: "description",
+				id: "description",
 
 				rules: {
 					required: true,
@@ -227,19 +223,27 @@ export default {
 			this.selectedFile = e.target.files[0];
 			const file = e.target.files[0];
 			const formData = new FormData();
-			formData.append('image', file);
-			this.url = URL.createObjectURL(file);
 
-			try {
-				const config = {
-					headers: {
-						'Content-Type': 'multipart/form-data',
-					},
-				};
-				const { data } = await axios.post('/uploads', formData, config);
-				this.imagePath = data;
-			} catch (error) {
-				console.error(error);
+			if (file) {
+				formData.append("image", file);
+				this.url = URL.createObjectURL(file);
+				try {
+					const config = {
+						headers: {
+							"Content-Type": "multipart/form-data",
+						},
+					};
+					const { data } = await axios.post(
+						"/uploads",
+						formData,
+						config
+					);
+					this.imagePath = data;
+				} catch (error) {
+					console.error(error);
+				}
+			} else {
+				return;
 			}
 		},
 	},

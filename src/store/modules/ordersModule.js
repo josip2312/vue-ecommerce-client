@@ -44,7 +44,7 @@ export default {
 			state.paymentInfo = data;
 		},
 		[PUSH_CREATED_ORDER]: (state, order) => {
-			state.orders.push(order);
+			state.myOrders.push(order);
 		},
 		[SET_MY_ORDERS]: (state, orders) => {
 			state.myOrders = orders;
@@ -74,6 +74,7 @@ export default {
 				const { data } = await axios.post('/orders', order);
 				commit(PUSH_CREATED_ORDER, data);
 				const id = data._id;
+				console.log(id);
 				router.push({
 					name: 'OrderDetails',
 					params: {
@@ -81,7 +82,7 @@ export default {
 					},
 				});
 			} catch (error) {
-				console.error(error);
+				console.log(error);
 			}
 		},
 		[FETCH_MY_ORDERS]: async ({ commit }) => {

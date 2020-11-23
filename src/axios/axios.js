@@ -7,7 +7,7 @@ import { LOGOUT_USER } from '@/store/constants/action_types';
 
 axios.defaults.baseURL = process.env.VUE_APP_BACKEND_URL;
 
-axios.interceptors.request.use(function(config) {
+axios.interceptors.request.use((config) => {
 	store.state.loading = true;
 
 	const token = store.getters.getJWT;
@@ -17,7 +17,7 @@ axios.interceptors.request.use(function(config) {
 });
 
 axios.interceptors.response.use(
-	function(response) {
+	(response) => {
 		store.state.loading = false;
 
 		if (response.data.message) {
@@ -29,7 +29,7 @@ axios.interceptors.response.use(
 
 		return response;
 	},
-	function(error) {
+	(error) => {
 		store.state.loading = false;
 
 		if (error.response) {

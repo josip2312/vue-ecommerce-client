@@ -3,9 +3,7 @@
 		<div class="modal" v-if="isInfoUpdated">
 			<div class="overlay">
 				<div class="modal-message spacing">
-					<p>
-						Profile information updated
-					</p>
+					<p>Profile information updated</p>
 					<button class="btn" @click="$emit('hide-success')">
 						Ok
 					</button>
@@ -17,7 +15,7 @@
 
 <script>
 export default {
-	name: 'ProfileSuccessModal',
+	name: "ProfileSuccessModal",
 	props: {
 		isInfoUpdated: {
 			type: Boolean,
@@ -45,7 +43,6 @@ export default {
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.8);
 	position: fixed;
-	filter: blur(10px);
 }
 .modal-message {
 	position: absolute;
